@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deixa de ser curioso</title>
+    <!-- Importação da fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fonte-principal: 'Inter', sans-serif;
+            --cor-primaria: #38637E;
+            --cor-secundaria: #223D4D;
+            --cor-terciaria: #FFFFFF;
+            --cor-quartenaria: #e3ebf0;
+        }
+
+        html, body {
+            font-family: var(--fonte-principal);
+            margin: 0;
+            background-color: var(--cor-terciaria);
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h1 {
+            font-size: 5em;
+            color: var(--cor-primaria);
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: var(--cor-secundaria);
+            margin: 0;
+        }
+
+        a.button {
+            padding: 0 20px;
+            min-width: 100px;
+            height: 50px;
+            background-color: var(--cor-primaria);
+            border-radius: 1.25em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-terciaria);
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="content">
+            <h1>:/</h1>
+            <p><strong>Deixa de ser curioso,</strong> volte para a página anterior.</p> 
+        </div>
+        <a class="button" href="/login.html">Voltar</a>
+    </main>
+</body>
+</html>

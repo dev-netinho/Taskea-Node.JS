@@ -1,0 +1,384 @@
+/* Atribuições gerais */
+
+:root {
+    --cor-primaria: #FFF;
+    --cor-secundaria: #38637E;
+    --cor-terciaria: #223D4D;
+    --cor-quartenaria: #C9D7E0;
+    --fonte-principal: "Inter";
+    --input-width: 13.968em;
+    --input-height: 2.063em;
+    --input-radius: 30em;
+}
+
+a {
+    all: unset;
+}
+
+/* Evitar barra de rolagem na área de trabalho */
+
+html,
+body {
+    font-family: var(--fonte-principal);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Cabeçalho */
+
+.container_header {
+    width: 99%;
+    height: 15%;
+
+    box-sizing: border-box;
+    margin: 0 auto;
+    /* border: 2px solid black; */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.nova_tarefa {
+    height: 2.75em;
+    width: 9.5em;
+    border-radius: 3.688em;
+    background-color: var(--cor-secundaria);
+
+    color: var(--cor-primaria);
+    font-weight: 800;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+#logo {
+    width: 10.688em;
+    height: 2.75em;
+}
+
+
+/* Ícone da conta */
+
+.conta {
+    color: var(--cor-secundaria);
+    align-items: center;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    user-select: none;
+}
+
+#account,
+#triangle {
+    cursor: pointer;
+}
+
+#account {
+    font-size: 4.083em;
+}
+
+#triangle {
+    font-size: 1.5em;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+/* Classe que ativa a rotação */
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+/* Dropdown da conta */
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 1.135em 0 1.135em 1.135em;
+    margin-top: 4px;
+    width: 200px;
+    display: none;
+    z-index: 1000;
+    padding: 1em;
+}
+
+/* Botão para sair */
+
+#sair {
+    width: 4.111em;
+    height: 2.271em;
+    border-radius: 1.249em;
+    background-color: #c1121f;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#username {
+    margin-bottom: 0.5em;
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #e0c9c9;
+}
+
+/* Dropdown do menu */
+
+.menu_options {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 1.135em 0 1.135em 1.135em;
+    display: none;
+    padding: 1em;
+    width: 200px;
+    z-index: 1000;
+}
+
+.dropdown-menu:hover {
+    background-color: #e0c9c9;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.task-card input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+#acoes-excluir {
+    display: flex;
+    gap: 0.5em;
+    margin: 1em 0;
+    text-align: center;
+    justify-content: center;
+
+}
+
+#excluir-selecionadas {
+    background-color: #c1121f;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font: inherit;
+}
+
+#mensagem-vazia {
+    display: none;
+    color: gray;
+    text-align: center;
+    margin: 2em;
+    font-style: italic;
+}
+
+/* Opções para tarefas */
+
+.container_options_tasks {
+    height: 99%;
+    width: 99%;
+
+    box-sizing: border-box;
+    margin: 0 auto;
+    /*x border: 2px solid black; */
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    color: var(--cor-terciaria);
+    margin-bottom: -1.25em;
+    margin: autoac;
+}
+
+#menu,
+#check_box,
+h1 {
+    font-size: 3em;
+    user-select: none;
+}
+
+#menu,
+#excluir {
+    cursor: pointer;
+}
+
+/* Tarefas */
+
+.task-card {
+    border: none;
+    border-radius: 1.249em 1.249em 1.249em 1.249em;
+    padding: 2em;
+    margin: 1em auto;
+    width: 60%;
+    max-width: 600px;
+    background-color: var(--cor-quartenaria);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+/* Estado inicial para animação de entrada */
+.task-card.animar-entrada {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Estado para animação de saída */
+.task-card.animar-saida {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.task-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(56, 99, 126, 0.25);
+}
+
+.task-card>div {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+/* Título */
+
+.task-card h3 {
+    margin: 0 0 0 0;
+    margin-bottom: 3%;
+    font-size: 1.3em;
+    font-weight: 900;
+    color: var(--cor-terciaria);
+}
+
+/* Descrição */
+
+.task-card p {
+    margin: 0;
+    font-size: 1em;
+    color: var(--cor-terciaria);
+}
+
+/* Media query para telas com largura máxima de 768px */
+
+@media only screen and (max-width: 768px) {
+    #acoes-excluir {
+        display: flex;
+        gap: 0.5em;
+        margin: 1em 0;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: -0.25em;
+    }
+
+    .task-card {
+        padding: 1.2em 0.25em;
+        width: 98%;
+    }
+
+    /* Checkbox alinhado à esquerda no card */
+    .task-card > div {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1em;
+    }
+    .task-card input[type="checkbox"] {
+        margin-left: 2em;
+        margin-right: 0.1em;
+        align-self: center;
+    }
+
+    .task-card h3,
+    .task-card p {
+        padding: 0 0 0 1rem;
+    }
+
+    .task-card h3 {
+        margin-bottom: 3%;
+    }
+
+    .container_header {
+        width: 95%;
+        height: 8%;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    .options {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        color: var(--cor-terciaria);
+    }
+
+    #menu,
+    #filter,
+    h1 {
+        font-size: 3em;
+    }
+
+    #Suas_tarefas {
+        font-size: 2.308em;
+    }
+
+    .nova_tarefa {
+        height: 3em;
+        width: 7em;
+        border-radius: 3.688em;
+        background-color: var(--cor-secundaria);
+        color: var(--cor-primaria);
+        font-size: 0.75em;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #logo {
+        width: 6.205em;
+        height: 1.597em;
+    }
+
+    /* Conta */
+    #account {
+        font-size: 2.371em;
+    }
+
+    #triangle {
+        font-size: 1.293em;
+    }
+}

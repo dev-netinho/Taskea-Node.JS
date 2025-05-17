@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/new_task/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Nova tarefa</title>
+</head>
+<body>
+    <main class="container">
+        <img src="/assets/Taskea_logo.png"></img>
+        <div class="center-box">
+            <div class="write">
+                <input type="text" id="text" name="text" placeholder="Nova tarefa" required>
+                <textarea id="desc" name="desc" placeholder="Adicionar uma descrição" required></textarea>
+            </div>
+            <div class="options">
+                <a href="home.html">
+                    <div id="voltar" class="buttons">Voltar</div>
+                </a>
+                    <div id="salvar" class="buttons">Salvar</div>
+            </div>
+        </div>
+
+        <script>
+        document.getElementById('salvar').addEventListener('click', async () => {
+        const titulo     = document.getElementById('text').value.trim();
+        const descricao  = document.getElementById('desc').value.trim();
+
+        if (titulo === '') {
+            alert('Por favor, insira um título para a tarefa.');
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Você não está logado. Faça login novamente.');
+            window.location.href = '/login.html';
+            return;
+        }
+
+        try {
+            const resp = await fetch('/tarefas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ titulo, descricao })
+            });
+
+            if (resp.ok) {
+            alert('Tarefa criada!');
+            window.location.href = '/home.html';
+            } else {
+            const erro = await resp.json();
+            alert(erro.mensagem || 'Erro ao criar tarefa');
+            }
+        } catch (err) {
+            alert('Falha de rede: ' + err.message);
+        }
+        });
+        </script>
+</body>
+</html>

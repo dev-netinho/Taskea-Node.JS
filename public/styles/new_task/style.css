@@ -1,0 +1,144 @@
+/* Atributos gerais */
+
+:root {
+    --fonte-principal: "Inter";
+    --cor-primaira: #223D4D;
+    --cor-secundaria: #e3ebf0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: var(--fonte-principal);
+}
+
+img {
+    width: 10%;       
+    height: auto;
+} 
+
+/* Container principal: centraliza tudo */
+
+.container {
+    height: 100vh; /* ocupa 100% da altura da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    background-color: var(--cor-secundaria); /* opcional: cor de fundo */
+    gap: 3em;
+}
+
+/* Caixa geométrica central (ex: balão) */
+
+.center-box {
+    background-color: white;
+    border-radius: 1em;
+    padding: 2em;
+    width: 100%;
+    max-width: 20.125em;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+input {
+    all: unset;
+}
+/* Comportamento de "Nova Tarefa" e "Adicionar um parágrafo" */
+
+.write {
+    display: flex;
+    flex-direction: column;
+}
+
+#text {
+    color: var(--cor-primaira);
+    font-size: 2.312em;
+    font-weight: 900;
+
+    margin-bottom: 0.2em;
+}
+
+#desc {
+    width: 20.048em;
+    height: 11.668em;
+    background-color: #e3ebf0;
+    border-radius: 0 1.264em 1.264em 1.264em;
+    font: inherit;
+    color: #223D4D;
+    box-sizing: border-box;
+    padding: 1em; /* padding interno */
+    resize: none; /* opcional: impede redimensionamento */
+    border: none; /* remove borda padrão */
+    outline: none; /* remove contorno ao focar */
+}
+
+#desc::placeholder {
+    color: #7a8a99;
+    text-align: left;
+}
+
+
+/* "Salvar" e "Voltar" */
+
+a {
+    all: unset; 
+}
+
+.options {
+    display: flex;
+    gap: 0.5em;
+}
+
+.buttons {
+    width: 4.949em;
+    height: 2.023em;
+    border-radius: 1.987em;
+
+    display: flex;
+    align-items: center;      /* Centraliza verticalmente */
+    justify-content: center;  /* Centraliza horizontalmente */
+    text-align: center;       /* Garante que o texto fique centralizado */
+
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+
+    font-weight: 900;
+}
+
+#salvar {
+    background-color: var(--cor-primaira);
+    color: var(--cor-secundaria);
+}
+
+#voltar {
+    color: var(--cor-primaira);
+    background-color: var(--cor-secundaria);
+}
+
+@media (max-width: 768px) {
+    .container {
+        background-color: transparent;
+        display: flex;
+        flex-direction: column; /* mantenha a direção */
+        justify-content: flex-start;  /* alinha verticalmente ao topo */
+        align-items: flex-start;      /* alinha horizontalmente ao início */
+        gap: 3em; /* se quiser manter espaçamento */
+    }
+
+    img {
+        display: none;
+    }
+}
+
+
+
+

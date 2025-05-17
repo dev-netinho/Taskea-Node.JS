@@ -1,0 +1,234 @@
+/* Atributos gerais */
+
+:root {
+    --fonte-principal: "Inter";
+    --cor-primairia: #38637E;
+    --cor-secundaria: #223D4D;
+    --cor-terciaria: #FFFFFF;
+    --cor-quartenaria: #e3ebf0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-quartenaria);
+}
+
+input, a {
+    all: unset;
+}
+
+input[type="checkbox"] {
+    all: revert;
+    accent-color: var(--cor-secundaria);
+    width: 1em;
+    height: 1em;
+    margin-right: 0.2em;
+    cursor: pointer;
+}
+
+#already_account, #cadastrar {
+    cursor: pointer;
+}
+
+img {
+    width: 10%;       
+    height: auto;
+} 
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 3em;
+}
+
+.geometric-box {
+    background-color: var(--cor-primairia);
+    padding: 4em;
+    border-radius: 2.886em;
+    max-width: 25em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+
+    color: var(--cor-terciaria);
+}
+
+/* Comportamento dos campos de preenchimento e acesso */
+
+input {
+    width: 20.968em;
+    height: 2.053em;  
+    border-radius: 2.016em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    
+    gap: 0.5em;
+}
+
+input::placeholder {
+    color: #757575;
+    text-align: left;
+}
+
+/* Nome de usuário, email e senha */
+
+#username, #email, #password, #cadastro_botao {
+    background-color: var(--cor-quartenaria);
+    padding: 0.5em 1em;
+    color: var(--cor-secundaria);
+}
+
+#password {
+    margin-bottom: 5%;
+}
+
+/* Personalização do botão de "Cadastrar" */
+
+#cadastro_botao {
+    text-align: center;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-terciaria);
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#cadastro_botao:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+#cadastro_botao:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Configurações do título "Cadastrar" */
+
+.cadastro, #cadastro_logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.833em;
+
+    gap: 0.2em;
+}
+
+/* Input com ícone */
+.input-icon {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.input-icon input {
+    width: 100%;
+    padding-left: 2.5em;
+    box-sizing: border-box;
+}
+
+.input-icon .material-icons {
+    position: absolute;
+    left: 0.8em;
+    color: #757575;
+    font-size: 1.3em;
+    pointer-events: none;
+}
+
+/* Ajuste para inputs dentro do form */
+form.geometric {
+    width: 100%;
+    max-width: 21em;
+    align-items: center;
+}
+
+/* Opções abaixo dos inputs */
+/* O width dessa classe é improvisado para criar uma largura idêntica com os inputs acima, ou seja, uma gambiarra */
+.options {
+    width: 110%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    font-size: 0.98em;
+    color: var(--cor-terciaria);
+}
+
+.options .remember {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    cursor: pointer;
+}
+
+.options input[type="checkbox"] {
+    accent-color: var(--cor-secundaria);
+    width: 1em;
+    height: 1em;
+    margin-right: 0.2em;
+}
+
+.options .forgot {
+    color: var(--cor-terciaria);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.98em;
+}
+
+@media (max-width: 600px) {
+    .container {
+        gap: 1.5em;
+    }
+
+    .geometric-box {
+        padding: 2em;
+        border-radius: 1.5em;
+        max-width: 80vw;
+        gap: 0.5em;
+    }
+
+    input {
+        width: 90vw;
+        max-width: 18em;
+        height: 1.5em;
+        font-size: 1em;
+    }
+
+    .cadastro, #cadastro_logo {
+        font-size: 1.2em;
+        gap: 0.1em;
+    }
+
+    img {
+        width: 40%;
+    }
+
+    form.geometric {
+        max-width: 18em;
+    }
+    .input-icon input {
+        font-size: 1em;
+    }
+    .options {
+        font-size: 0.95em;
+    }
+}

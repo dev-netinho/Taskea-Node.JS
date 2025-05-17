@@ -1,0 +1,152 @@
+/* Atributos gerais */
+
+:root {
+    --fonte-principal: "Inter";
+    --cor-primairia: #38637E;
+    --cor-secundaria: #223D4D;
+    --cor-terciaria: #FFFFFF;
+    --cor-quartenaria: #e3ebf0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-quartenaria);
+}
+
+input, a {
+    all: unset;
+}
+
+#already_account, #cadastrar {
+    cursor: pointer;
+}
+
+img {
+    width: 10%;       
+    height: auto;
+} 
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 3em;
+}
+
+.geometric-box {
+    background-color: var(--cor-primairia);
+    padding: 4em;
+    border-radius: 2.886em;
+    max-width: 25em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+
+    color: var(--cor-terciaria);
+}
+
+/* Comportamento dos campos de preenchimento e acesso */
+
+input {
+    width: 20.968em;
+    height: 2.053em;  
+    border-radius: 2.016em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    
+    gap: 0.5em;
+}
+
+input::placeholder {
+    color: #757575;
+    text-align: left;
+}
+
+/* Nome de usuário, email e senha */
+
+#username, #email, #password, #cadastro_botao {
+    background-color: var(--cor-quartenaria);
+    padding: 0.5em 1em;
+    color: var(--cor-secundaria);
+}
+
+#password {
+    margin-bottom: 5%;
+}
+
+/* Personalização do botão de "Cadastrar" */
+
+#cadastro_botao {
+    text-align: center;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-terciaria);
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#cadastro_botao:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+#cadastro_botao:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Configurações do título "Cadastrar" */
+
+.cadastro, #cadastro_logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.833em;
+
+    gap: 0.2em;
+}
+
+@media (max-width: 600px) {
+    .container {
+        gap: 1.5em;
+    }
+
+    .geometric-box {
+        padding: 2em;
+        border-radius: 1.5em;
+        max-width: 80vw;
+        gap: 0.5em;
+    }
+
+    input {
+        width: 90vw;
+        max-width: 18em;
+        height: 1.5em;
+        font-size: 1em;
+    }
+
+    .cadastro, #cadastro_logo {
+        font-size: 1.2em;
+        gap: 0.1em;
+    }
+
+    img {
+        width: 40%;
+    }
+}

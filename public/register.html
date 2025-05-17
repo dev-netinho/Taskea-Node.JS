@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/register/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <title>Cadastro</title>
+</head>
+<body>
+    <main class="container">
+        <img src="/assets/Taskea_logo.png"></img>
+        <div class="geometric-box">
+            <div class="cadastro">
+                <h1 id="cadastro_titulo">Cadastro</h1>
+                <span id="cadastro_logo" class="material-symbols-outlined" name="login">person_add</span>
+            </div>
+            <div class="inputs">
+                <form class="geometric" action="#" method="post" autocomplete="on">
+                    <input type="text" id="username" name="username" placeholder="Nome de usuário" required>
+                    <input type="email" id="email" name="email" placeholder="E-mail do usuário" autocomplete="username" required>
+                    <input type="password" id="password" name="password" placeholder="Senha" autocomplete="current-password" required>
+                    <input type="submit" id="cadastro_botao" value="Cadastrar">
+                </form>
+            </div> 
+            <a id="already_account"href="/login.html">Já tem uma conta? <strong>Faça o login</strong></a>
+        </div>
+    </main>
+
+    <script>
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const usernameInput = document.getElementById('username');
+
+    // Email: mensagem personalizada se estiver vazio ou inválido
+    emailInput.addEventListener('invalid', function () {
+        if (emailInput.value === '') {
+            emailInput.setCustomValidity('Por favor, preencha o e-mail.');
+        } else {
+            emailInput.setCustomValidity('Digite um e-mail válido.');
+        }
+    });
+
+    emailInput.addEventListener('input', function () {
+        emailInput.setCustomValidity('');
+    });
+
+    // Senha: mensagem personalizada se estiver vazia
+    passwordInput.addEventListener('invalid', function () {
+        passwordInput.setCustomValidity('Por favor, preencha a senha.');
+    });
+
+    passwordInput.addEventListener('input', function () {
+        passwordInput.setCustomValidity('');
+    });
+
+    // Nome de usuário: mensagem personalizada se estiver vazio
+    usernameInput.addEventListener('invalid', function () {
+        usernameInput.setCustomValidity('Por favor, preencha o nome de usuário.');
+    });
+
+    usernameInput.addEventListener('input', function () {
+        usernameInput.setCustomValidity('');
+    });
+    document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const nome  = username.value.trim();
+  const email = emailInput.value.trim();
+  const senha = passwordInput.value.trim();
+
+  try {
+    const resp = await fetch('/auth/registrar', {
+      method: 'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ nome, email, senha })
+    });
+
+    if (resp.ok) {
+      alert('Cadastro feito! Faça login agora.');
+      window.location.href = '/login.html';
+    } else {
+      const erro = await resp.json();
+      alert(erro.mensagem || 'Erro ao cadastrar');
+    }
+  } catch(err){
+    alert('Falha de rede: '+err.message);
+  }
+});
+</script>
+</body>
+</html>
