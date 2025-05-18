@@ -2,118 +2,65 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/new_task/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles/new_task/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
-    <title>Nova Tarefa</title>
+    <title>Nova tarefa</title>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="/assets/Taskea_logo.png" alt="Logo Taskea">
-        </div>
-        <div class="user">
-            <span id="user_name">Olá, Usuário</span>
-            <button id="logout_button">Sair</button>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="title">
-                <h1>Nova Tarefa</h1>
-                <a href="/home.html"><button id="back_button">Voltar</button></a>
+    <main class="container">
+        <img src="/assets/Taskea_logo.png"></img>
+        <div class="center-box">
+            <div class="write">
+                <input type="text" id="text" name="text" placeholder="Nova tarefa" required>
+                <textarea id="desc" name="desc" placeholder="Adicionar uma descrição" required></textarea>
             </div>
-            <div class="form-container">
-                <form id="task-form">
-                    <div class="form-group">
-                        <label for="titulo">Título</label>
-                        <input type="text" id="titulo" name="titulo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao">Descrição</label>
-                        <textarea id="descricao" name="descricao" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="prazo">Prazo</label>
-                        <input type="date" id="prazo" name="prazo" required>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" id="save-task">Salvar</button>
-                        <button type="button" id="cancel-task" onclick="window.location.href='/home.html'">Cancelar</button>
-                    </div>
-                </form>
+            <div class="options">
+                <a href="home.html">
+                    <div id="voltar" class="buttons">Voltar</div>
+                </a>
+                    <div id="salvar" class="buttons">Salvar</div>
             </div>
         </div>
-    </main>
 
-    <script>
-    // Verificar se o usuário está logado
-    document.addEventListener('DOMContentLoaded', function() {
-        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-        
-        if (!usuarioLogado) {
-            // Redirecionar para a página de login se não estiver logado
+        <script>
+        document.getElementById('salvar').addEventListener('click', async () => {
+        const titulo     = document.getElementById('text').value.trim();
+        const descricao  = document.getElementById('desc').value.trim();
+
+        if (titulo === '') {
+            alert('Por favor, insira um título para a tarefa.');
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Você não está logado. Faça login novamente.');
             window.location.href = '/login.html';
             return;
         }
-        
-        // Exibir nome do usuário
-        document.getElementById('user_name').textContent = `Olá, ${usuarioLogado.nome}`;
-        
-        // Configurar botão de logout
-        document.getElementById('logout_button').addEventListener('click', function() {
-            localStorage.removeItem('usuarioLogado');
-            window.location.href = '/login.html';
+
+        try {
+            const resp = await fetch('/tarefas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ titulo, descricao })
+            });
+
+            if (resp.ok) {
+            alert('Tarefa criada!');
+            window.location.href = '/home.html';
+            } else {
+            const erro = await resp.json();
+            alert(erro.mensagem || 'Erro ao criar tarefa');
+            }
+        } catch (err) {
+            alert('Falha de rede: ' + err.message);
+        }
         });
-        
-        // Configurar data mínima como hoje
-        const hoje = new Date().toISOString().split('T')[0];
-        document.getElementById('prazo').min = hoje;
-        
-        // Configurar formulário
-        document.getElementById('task-form').addEventListener('submit', salvarTarefa);
-    });
-    
-    // Função para salvar tarefa
-    function salvarTarefa(event) {
-        event.preventDefault();
-        
-        const titulo = document.getElementById('titulo').value.trim();
-        const descricao = document.getElementById('descricao').value.trim();
-        const prazo = document.getElementById('prazo').value;
-        
-        if (!titulo || !descricao || !prazo) {
-            alert('Por favor, preencha todos os campos.');
-            return;
-        }
-        
-        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-        const tarefasUsuarios = JSON.parse(localStorage.getItem('tarefasUsuarios') || '{}');
-        const tarefasDoUsuario = tarefasUsuarios[usuarioLogado.id] || [];
-        
-        // Criar nova tarefa
-        const novaTarefa = {
-            id: Date.now().toString(),
-            titulo,
-            descricao,
-            prazo,
-            concluida: false,
-            dataCriacao: new Date().toISOString()
-        };
-        
-        // Adicionar à lista e salvar
-        tarefasDoUsuario.push(novaTarefa);
-        tarefasUsuarios[usuarioLogado.id] = tarefasDoUsuario;
-        localStorage.setItem('tarefasUsuarios', JSON.stringify(tarefasUsuarios));
-        
-        alert('Tarefa criada com sucesso!');
-        window.location.href = '/home.html';
-    }
-    </script>
+        </script>
 </body>
 </html>

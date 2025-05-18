@@ -1,149 +1,224 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/home/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
-    <title>Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/home/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <title>Home</title>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="/assets/Taskea_logo.png" alt="Logo Taskea">
+  <div class="container_header">
+    <div class="header">
+      <div class="nova_tarefa">
+        <a href="/new_task.html">
+          <p id="task">Nova tarefa</p>
+        </a>
+      </div>
+      <img id="logo" src="./assets/Taskea_logo.png" />
+      <div class="conta" id="conta">
+        <span id="triangle" class="material-symbols-outlined">arrow_drop_up</span>
+        <span id="account" class="material-symbols-outlined">account_circle</span>
+        <div class="dropdown" id="dropdown">
+          <div id="username">Olá, <strong>nome do usuário</strong>.</div>
+          <a href="/login.html" class="dropdown-item" id="sair">Sair</a>
         </div>
-        <div class="user">
-            <span id="user_name">Olá, Usuário</span>
-            <button id="logout_button">Sair</button>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="title">
-                <h1>Minhas Tarefas</h1>
-                <a href="/new_task.html"><button id="new_task">Nova Tarefa</button></a>
-            </div>
-            <div id="tasks_container">
-                <!-- As tarefas serão adicionadas aqui dinamicamente -->
-            </div>
-        </div>
-    </main>
+      </div>
+    </div>
+  </div>
 
-    <script>
-    // Verificar se o usuário está logado
-    document.addEventListener('DOMContentLoaded', function() {
-        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-        
-        if (!usuarioLogado) {
-            // Redirecionar para a página de login se não estiver logado
-            window.location.href = '/login.html';
-            return;
-        }
-        
-        // Exibir nome do usuário
-        document.getElementById('user_name').textContent = `Olá, ${usuarioLogado.nome}`;
-        
-        // Carregar tarefas do usuário
-        carregarTarefas();
-        
-        // Configurar botão de logout
-        document.getElementById('logout_button').addEventListener('click', function() {
-            localStorage.removeItem('usuarioLogado');
-            window.location.href = '/login.html';
-        });
+  <div class="container_options_tasks">
+    <div class="options">
+      <span id="check_box" class="material-symbols-outlined">check_box</span>
+      <h1 id="Suas_tarefas">Suas tarefas</h1>
+      <div class="menu_options">
+        <span id="menu" class="material-symbols-outlined">menu</span>
+        <div class="dropdown-menu" id="menuDropdown">
+          <div id="excluir" class="dropdown-item">Excluir</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Botão "Excluir selecionadas" -->
+      <div id="acoes-excluir">
+          <button id="excluir-selecionadas">Excluir selecionadas</button>
+          <button id="cancelar-exclusao" style="background-color: #ccc;
+          color: white;
+          border: none;
+          padding: 0.5em 1em;
+          border-radius: 20px;
+          cursor: pointer;
+          font-weight: 600;
+          font: inherit;">Cancelar</button>
+      </div>
+    <!-- Mensagem se estiver vazio -->
+    <p id="mensagem-vazia">Não há tarefas no momento</p>
+
+    <div id="lista-tarefas" style="padding: 1em;"></div>
+  </div>
+
+<script>
+/* ---------- CONTAS & MENUS (mantido) ---------- */
+const conta     = document.getElementById("conta");
+const triangle  = document.getElementById("triangle");
+const dropdown  = document.getElementById("dropdown");
+
+conta.addEventListener("click", ()=>{
+  dropdown.classList.toggle("show");
+  conta.classList.toggle("open");
+  triangle.classList.toggle("rotate");
+});
+document.addEventListener("click",(e)=>{
+  if(!conta.contains(e.target)){
+    dropdown.classList.remove("show");
+    conta.classList.remove("open");
+    triangle.classList.remove("rotate");
+  }
+});
+
+const menuIcon      = document.getElementById("menu");
+const menuDropdown  = document.getElementById("menuDropdown");
+menuIcon.addEventListener("click",(e)=>{
+  e.stopPropagation();
+  menuDropdown.classList.toggle("show");
+});
+document.addEventListener("click",(e)=>{
+  if(!menuDropdown.contains(e.target) && !menuIcon.contains(e.target)){
+    menuDropdown.classList.remove("show");
+  }
+});
+
+/* ---------- VARIÁVEIS GERAIS ---------- */
+let tarefas = [];                // agora virá da API
+const token = localStorage.getItem('token');
+if(!token){ window.location.href='/login.html'; }
+
+const container            = document.getElementById("lista-tarefas");
+const mensagemVazia        = document.getElementById("mensagem-vazia");
+const btnExcluir           = document.getElementById("excluir");
+let   modoExclusao         = false;   // alterna checkboxes
+let   indicesSelecionados  = [];
+
+/* ---------- CARREGA TAREFAS DA API ---------- */
+async function carregarTarefas(){
+  try{
+    const resp = await fetch('/tarefas',{
+      headers:{ 'Authorization': `Bearer ${token}` }
     });
-    
-    // Função para carregar tarefas do localStorage
-    function carregarTarefas() {
-        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-        const tarefasUsuarios = JSON.parse(localStorage.getItem('tarefasUsuarios') || '{}');
-        const tarefasDoUsuario = tarefasUsuarios[usuarioLogado.id] || [];
-        
-        const tasksContainer = document.getElementById('tasks_container');
-        tasksContainer.innerHTML = '';
-        
-        if (tarefasDoUsuario.length === 0) {
-            tasksContainer.innerHTML = '<p class="no-tasks">Você não tem tarefas. Clique em "Nova Tarefa" para adicionar.</p>';
-            return;
-        }
-        
-        tarefasDoUsuario.forEach(tarefa => {
-            const tarefaElement = document.createElement('div');
-            tarefaElement.className = 'task';
-            tarefaElement.dataset.id = tarefa.id;
-            
-            const statusClass = tarefa.concluida ? 'completed' : 'pending';
-            
-            tarefaElement.innerHTML = `
-                <div class="task-content ${statusClass}">
-                    <h3>${tarefa.titulo}</h3>
-                    <p>${tarefa.descricao}</p>
-                    <div class="task-footer">
-                        <span class="task-date">Prazo: ${formatarData(tarefa.prazo)}</span>
-                        <div class="task-actions">
-                            <button class="toggle-status" data-id="${tarefa.id}">
-                                ${tarefa.concluida ? 'Reabrir' : 'Concluir'}
-                            </button>
-                            <button class="delete-task" data-id="${tarefa.id}">Excluir</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            tasksContainer.appendChild(tarefaElement);
-        });
-        
-        // Adicionar event listeners para os botões
-        document.querySelectorAll('.toggle-status').forEach(button => {
-            button.addEventListener('click', alterarStatusTarefa);
-        });
-        
-        document.querySelectorAll('.delete-task').forEach(button => {
-            button.addEventListener('click', excluirTarefa);
-        });
+    tarefas = resp.ok ? await resp.json() : [];
+    renderizarTarefas();
+  }catch(err){
+    alert('Erro ao buscar tarefas: '+err.message);
+  }
+}
+carregarTarefas();
+
+/* ---------- RENDERIZAÇÃO ---------- */
+function renderizarTarefas(){
+  container.innerHTML='';
+  indicesSelecionados = [];
+
+  if(tarefas.length===0){
+    mensagemVazia.style.display='block';
+    return;
+  }
+  mensagemVazia.style.display='none';
+
+  tarefas.forEach((tarefa,i)=>{
+    const card = document.createElement('div');
+    card.className='task-card';
+
+    const wrap = document.createElement('div');
+    wrap.style.display='flex';
+    wrap.style.alignItems='center';
+    wrap.style.gap='1em';
+
+    if(modoExclusao){
+      const cb = document.createElement('input');
+      cb.type='checkbox';
+      cb.dataset.index=i;
+      cb.addEventListener('change',()=> {
+        const idx=parseInt(cb.dataset.index);
+        if(cb.checked) indicesSelecionados.push(idx);
+        else indicesSelecionados = indicesSelecionados.filter(v=>v!==idx);
+      });
+      wrap.appendChild(cb);
     }
-    
-    // Função para alterar o status de uma tarefa
-    function alterarStatusTarefa(event) {
-        const tarefaId = event.target.dataset.id;
-        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-        const tarefasUsuarios = JSON.parse(localStorage.getItem('tarefasUsuarios') || '{}');
-        const tarefasDoUsuario = tarefasUsuarios[usuarioLogado.id] || [];
-        
-        const tarefaIndex = tarefasDoUsuario.findIndex(t => t.id === tarefaId);
-        if (tarefaIndex !== -1) {
-            tarefasDoUsuario[tarefaIndex].concluida = !tarefasDoUsuario[tarefaIndex].concluida;
-            tarefasUsuarios[usuarioLogado.id] = tarefasDoUsuario;
-            localStorage.setItem('tarefasUsuarios', JSON.stringify(tarefasUsuarios));
-            carregarTarefas();
-        }
+
+    const info = document.createElement('div');
+    info.innerHTML = `<h3>${tarefa.titulo}</h3><p>${tarefa.descricao||''}</p>`;
+    wrap.appendChild(info);
+
+    card.appendChild(wrap);
+    container.appendChild(card);
+  });
+}
+
+/* ---------- BOTÃO MENU → ATIVAR EXCLUSÃO ---------- */
+btnExcluir.addEventListener('click',()=>{
+  modoExclusao = !modoExclusao;
+  renderizarTarefas();
+  menuDropdown.classList.remove("show");
+  if(modoExclusao) criarAcoesExcluir();
+});
+
+/* ---------- CRIA BARRA DE AÇÕES EXCLUIR ---------- */
+function criarAcoesExcluir(){
+  let barra = document.getElementById('acoes-excluir');
+  if(barra) barra.remove();
+
+  barra = document.createElement('div');
+  barra.id='acoes-excluir';
+
+  const btnOk = document.createElement('button');
+  btnOk.textContent='Excluir selecionadas';
+  btnOk.addEventListener('click', excluirSelecionadas);
+
+  const btnCanc = document.createElement('button');
+  btnCanc.textContent='Cancelar';
+  btnCanc.style.cssText='background:#ccc;color:#fff;border:none;padding:.5em 1em;border-radius:20px;cursor:pointer;font-weight:600;';
+  btnCanc.addEventListener('click', ()=>{ modoExclusao=false; renderizarTarefas(); barra.remove(); });
+
+  barra.append(btnOk,btnCanc);
+  container.parentNode.insertBefore(barra, container);
+}
+
+/* ---------- CHAMADA DELETE PARA CADA TAREFA ---------- */
+async function excluirSelecionadas(){
+  if(indicesSelecionados.length===0){ alert('Nenhuma tarefa marcada.'); return; }
+
+  try{
+    // manda deletes em sequência (poderia usar Promise.all)
+    for(const idx of indicesSelecionados){
+      const tarefa = tarefas[idx];
+      await fetch(`/tarefas/${tarefa.id}`,{
+        method:'DELETE',
+        headers:{ 'Authorization': `Bearer ${token}` }
+      });
     }
-    
-    // Função para excluir uma tarefa
-    function excluirTarefa(event) {
-        if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
-            const tarefaId = event.target.dataset.id;
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            const tarefasUsuarios = JSON.parse(localStorage.getItem('tarefasUsuarios') || '{}');
-            const tarefasDoUsuario = tarefasUsuarios[usuarioLogado.id] || [];
-            
-            const tarefasFiltradas = tarefasDoUsuario.filter(t => t.id !== tarefaId);
-            tarefasUsuarios[usuarioLogado.id] = tarefasFiltradas;
-            localStorage.setItem('tarefasUsuarios', JSON.stringify(tarefasUsuarios));
-            carregarTarefas();
-        }
-    }
-    
-    // Função para formatar data
-    function formatarData(dataString) {
-        const data = new Date(dataString);
-        return data.toLocaleDateString('pt-BR');
-    }
-    </script>
+    alert('Excluídas!');
+    modoExclusao=false;
+    await carregarTarefas();         // recarrega lista
+    document.getElementById('acoes-excluir')?.remove();
+  }catch(err){
+    alert('Erro ao excluir: '+err.message);
+  }
+}
+
+/* ---------- MOSTRAR NOME DO USUÁRIO ---------- */
+document.getElementById('username').innerHTML =
+  `Olá, <strong>${localStorage.getItem('usuarioNome')||'Usuário'}</strong>.`;
+
+/* ---------- LOGOUT (opção Sair) ---------- */
+document.getElementById('sair').addEventListener('click', ()=>{
+  localStorage.removeItem('token');
+  localStorage.removeItem('usuarioNome');
+});
+</script>
+
 </body>
 </html>

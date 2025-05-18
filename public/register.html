@@ -67,48 +67,31 @@
     usernameInput.addEventListener('input', function () {
         usernameInput.setCustomValidity('');
     });
-    
-    // Versão simulada para apresentação - sem backend
     document.querySelector('form').addEventListener('submit', async (e) => {
-      e.preventDefault();
+  e.preventDefault();
 
-      const nome = usernameInput.value.trim();
-      const email = emailInput.value.trim();
-      const senha = passwordInput.value.trim();
+  const nome  = username.value.trim();
+  const email = emailInput.value.trim();
+  const senha = passwordInput.value.trim();
 
-      try {
-        // Carregar usuários existentes ou inicializar array vazio
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        
-        // Verificar se o email já está em uso
-        if (usuarios.some(u => u.email === email)) {
-          alert('Este email já está cadastrado. Por favor, use outro email.');
-          return;
-        }
-        
-        // Criar novo usuário
-        const novoUsuario = {
-          id: Date.now().toString(),
-          nome,
-          email,
-          senha
-        };
-        
-        // Adicionar à lista e salvar
-        usuarios.push(novoUsuario);
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        
-        // Inicializar tarefas vazias para o usuário
-        const tarefasUsuarios = JSON.parse(localStorage.getItem('tarefasUsuarios') || '{}');
-        tarefasUsuarios[novoUsuario.id] = [];
-        localStorage.setItem('tarefasUsuarios', JSON.stringify(tarefasUsuarios));
-        
-        alert('Cadastro realizado com sucesso! Faça login para continuar.');
-        window.location.href = '/login.html';
-      } catch(err) {
-        alert('Erro ao cadastrar: ' + err.message);
-      }
+  try {
+    const resp = await fetch('/auth/registrar', {
+      method: 'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ nome, email, senha })
     });
-    </script>
+
+    if (resp.ok) {
+      alert('Cadastro feito! Faça login agora.');
+      window.location.href = '/login.html';
+    } else {
+      const erro = await resp.json();
+      alert(erro.mensagem || 'Erro ao cadastrar');
+    }
+  } catch(err){
+    alert('Falha de rede: '+err.message);
+  }
+});
+</script>
 </body>
 </html>
