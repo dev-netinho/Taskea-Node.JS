@@ -15,6 +15,9 @@
     }
   ],
   "routes": [
+    { "src": "/auth/(.*)", "dest": "/index.js" },
+    { "src": "/tarefas/(.*)", "dest": "/index.js" },
+    { "src": "/api/(.*)", "dest": "/index.js" },
     { "src": "/favicon.ico", "dest": "/public/assets/Taskea_logo.png" },
     { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
     { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
