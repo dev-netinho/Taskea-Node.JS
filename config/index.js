@@ -13,7 +13,7 @@ class Database {
         this.connection = sequelize;
         models.forEach(model => model.init(this.connection));
         this.associate();
-        await this.connection.sync(); 
+        // Não chamamos sync aqui para evitar duplicação
     }
 
     associate() {
@@ -22,6 +22,11 @@ class Database {
                 model.associate(this.connection.models);
             }
         });
+    }
+    
+    // Método sync exposto para ser chamado externamente
+    sync(options) {
+        return this.connection.sync(options);
     }
 }
 
