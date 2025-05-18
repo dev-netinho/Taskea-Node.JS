@@ -9,13 +9,21 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 // Configuração de rotas e middleware básicos que não dependem do banco
 app.use(express.json());
-app.use('/', express.static(path.join(__dirname, 'public')));
+
+// Configuração explícita para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: 0,
+  etag: false,
+  lastModified: false
+}));
 
 // Middleware para controle de cache de arquivos estáticos
 app.use((req, res, next) => {
   if (req.url.match(/\.(css|jpg|jpeg|png|gif|js|ico)$/)) {
     // Definir cabeçalhos para evitar problemas de cache
-    res.setHeader('Cache-Control', 'public, max-age=0');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   }
   next();
 });
