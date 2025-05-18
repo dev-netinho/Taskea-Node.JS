@@ -13,26 +13,15 @@ if (!fs.existsSync(dbDir)) {
   fs.mkdirSync(dbDir, { recursive: true });
 }
 
-// Tente usar better-sqlite3 se disponível, caso contrário use sqlite3 padrão
-let sequelize;
-try {
-  sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: dbPath,
-    logging: false,
-    dialectOptions: {
-      // Opções específicas para melhorar a compatibilidade com Vercel
-      mode: process.env.NODE_ENV === 'production' ? 1 : 2 // 1 = OPEN_READONLY, 2 = OPEN_READWRITE
-    }
-  });
-} catch (error) {
-  console.error('Erro ao inicializar Sequelize:', error);
-  // Fallback para configuração mais simples
-  sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: dbPath,
-    logging: false
-  });
-}
+// Configuração simplificada do Sequelize com sqlite3
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: dbPath,
+  logging: false,
+  dialectOptions: {
+    // Opções específicas para melhorar a compatibilidade com Vercel
+    mode: process.env.NODE_ENV === 'production' ? 1 : 2 // 1 = OPEN_READONLY, 2 = OPEN_READWRITE
+  }
+});
 
 module.exports = sequelize;
