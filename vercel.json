@@ -5,18 +5,20 @@
       "src": "index.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["data/**", "config/**", "models/**", "controllers/**", "routes/**", "middlewares/**"],
+        "includeFiles": ["data/**", "config/**", "models/**", "controllers/**", "routes/**", "middlewares/**", "public/**"],
         "installCommand": "npm install --no-optional"
       }
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "index.js"
-    }
+    { "src": "/favicon.ico", "dest": "/public/assets/Taskea_logo.png" },
+    { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
+    { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
+    { "src": "/(login|register|home|new_task|curiosity).html", "dest": "/public/$1.html" },
+    { "src": "/(.*)", "dest": "/index.js" }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "VERCEL": "1"
   }
 }
