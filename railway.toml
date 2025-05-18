@@ -8,8 +8,6 @@ buildCommand = "npm install"
 startCommand = "npm start"
 healthcheckPath = "/"
 healthcheckTimeout = 100
-restartPolicyType = "on-failure"
-restartPolicyMaxRetries = 10
 
 [nixpacks]
 nodejs = "18"
