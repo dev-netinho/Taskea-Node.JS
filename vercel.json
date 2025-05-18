@@ -8,13 +8,19 @@
         "includeFiles": ["data/**", "config/**", "models/**", "controllers/**", "routes/**", "middlewares/**", "public/**"],
         "installCommand": "npm install --no-optional"
       }
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     { "src": "/favicon.ico", "dest": "/public/assets/Taskea_logo.png" },
     { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
     { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
+    { "src": "/styles/(.*)/(.*)", "dest": "/public/styles/$1/$2" },
     { "src": "/(login|register|home|new_task|curiosity).html", "dest": "/public/$1.html" },
+    { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.js" }
   ],
   "env": {
