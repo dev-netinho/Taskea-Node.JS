@@ -63,30 +63,37 @@
     passwordInput.addEventListener('input', function () {
         passwordInput.setCustomValidity('');
     });
-    document.querySelector('form').addEventListener('submit', async (e) =>{
-  e.preventDefault();
+    
+    // Versão simulada para apresentação - sem backend
+    document.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  const email = emailInput.value.trim();
-  const senha = passwordInput.value.trim();
+      const email = emailInput.value.trim();
+      const senha = passwordInput.value.trim();
 
-  try{
-    const resp = await fetch('/auth/login',{
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ email, senha })
+      try {
+        // Verificar se o usuário existe no localStorage
+        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+        const usuario = usuarios.find(u => u.email === email);
+        
+        if (usuario && usuario.senha === senha) {
+          // Login bem-sucedido
+          localStorage.setItem('usuarioLogado', JSON.stringify({
+            id: usuario.id,
+            nome: usuario.nome,
+            email: usuario.email
+          }));
+          
+          // Redirecionar para a página inicial
+          window.location.href = '/home.html';
+        } else {
+          // Usuário não encontrado ou senha incorreta
+          alert('Email ou senha incorretos. Tente novamente.');
+        }
+      } catch(err) {
+        alert('Erro ao fazer login: ' + err.message);
+      }
     });
-
-    if(resp.ok){
-      const data = await resp.json();
-      localStorage.setItem('token', data.token);          // guarda JWT
-      localStorage.setItem('usuarioNome', data.nome);     
-      window.location.href = '/home.html';
-    }else{
-      const erro = await resp.json();
-      alert(erro.mensagem || 'Credenciais inválidas');
-    }
-  }catch(err){ alert('Falha: '+err.message);}
-});
     </script>
 </body>
 </html>
