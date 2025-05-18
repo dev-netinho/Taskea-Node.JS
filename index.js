@@ -10,11 +10,20 @@ const isProduction = process.env.NODE_ENV === 'production';
 // Configuração de rotas e middleware básicos que não dependem do banco
 app.use(express.json());
 
+// Configuração explícita para servir arquivos estáticos com diagnóstico
+app.use((req, res, next) => {
+  if (req.url.match(/\.(css|jpg|jpeg|png|gif|js|ico)$/)) {
+    console.log(`[DEBUG] Requisição de arquivo estático: ${req.url}`);
+  }
+  next();
+});
+
 // Configuração explícita para servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: 0,
   etag: false,
-  lastModified: false
+  lastModified: false,
+  index: false
 }));
 
 // Middleware para controle de cache de arquivos estáticos
@@ -46,6 +55,36 @@ app.get('/home.html', (_, res) => {
   res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
+app.get('/new_task.html', (_, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'new_task.html'));
+});
+
+// Rota de diagnóstico para verificar arquivos CSS
+app.get('/debug/css-check', (req, res) => {
+  const cssFiles = [
+    '/styles/home/style.css',
+    '/styles/login/style.css',
+    '/styles/register/style.css',
+    '/styles/new_task/style.css'
+  ];
+  
+  const results = {};
+  
+  cssFiles.forEach(file => {
+    const fullPath = path.join(__dirname, 'public', file);
+    results[file] = {
+      exists: fs.existsSync(fullPath),
+      size: fs.existsSync(fullPath) ? fs.statSync(fullPath).size : 0
+    };
+  });
+  
+  res.json({
+    publicDir: fs.existsSync(path.join(__dirname, 'public')),
+    stylesDir: fs.existsSync(path.join(__dirname, 'public', 'styles')),
+    cssFiles: results
+  });
+});
+
 // Inicialização segura do banco de dados
 let database;
 try {
@@ -73,6 +112,7 @@ try {
 // Middleware para tratar rotas não encontradas
 app.use((req, res, next) => {
   if (req.path.includes('.') && !req.path.endsWith('.html')) {
+    console.log(`[DEBUG] Arquivo não encontrado: ${req.path}`);
     // Para arquivos estáticos não encontrados, retorna 404 normal
     return next();
   }
