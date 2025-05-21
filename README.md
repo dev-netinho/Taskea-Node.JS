@@ -256,6 +256,11 @@ Estudante de Engenharia de Software | Backend e Cibersegurança
 Estudante de Engenharia de Software | Backend
 
 - LinkedIn: [https://www.linkedin.com/in/lucas-henrique-osouza/(https://www.linkedin.com/in/lucas-henrique-osouza/)
+ 
+**Nicolas Gabriel**  
+Estudante de Engenharia de Software | Front-end  
+
+- LinkedIn: [www.linkedin.com/in/nicolas-gabriel-a0841b242)  
 
 ---
 
