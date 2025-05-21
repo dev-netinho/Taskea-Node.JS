@@ -190,12 +190,17 @@ function criarAcoesExcluir(){
 
   const btnOk = document.createElement('button');
   btnOk.textContent='Excluir selecionadas';
+  btnOk.classList.add('botao-excluir');
   btnOk.addEventListener('click', excluirSelecionadas);
 
   const btnCanc = document.createElement('button');
-  btnCanc.textContent='Cancelar';
-  btnCanc.style.cssText='background:#ccc;color:#fff;border:none;padding:.5em 1em;border-radius:20px;cursor:pointer;font-weight:600;';
-  btnCanc.addEventListener('click', ()=>{ modoExclusao=false; renderizarTarefas(); barra.remove(); });
+  btnCanc.textContent = 'Cancelar';
+  btnCanc.classList.add('botao-cancelar');
+  btnCanc.addEventListener('click', () => {
+    modoExclusao = false;
+    renderizarTarefas();
+    barra.remove();
+  });
 
   barra.append(btnOk,btnCanc);
   container.parentNode.insertBefore(barra, container);
