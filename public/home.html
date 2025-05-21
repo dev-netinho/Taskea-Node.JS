@@ -3,23 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Teste</title>
   <link rel="stylesheet" href="styles/home/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <title>Home</title>
+  <style>
+    /* Coloque aqui seu CSS customizado para .botao-excluir, .botao-cancelar e outros */
+    .botao-excluir {
+        background-color: #c1121f;
+        color: white;
+        border: none;
+        padding: 0.5em 1em;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        font: inherit;
+    }
+    .botao-cancelar {
+      background-color: #ccc;
+      color: #333;
+      border: none;
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      font: inherit;
+    }
+    #acoes-excluir {
+      margin: 1em 0;
+    }
+  </style>
 </head>
 <body>
+
   <div class="container_header">
+    <div class="margin-top"></div>
     <div class="header">
       <div class="nova_tarefa">
         <a href="/new_task.html">
           <p id="task">Nova tarefa</p>
         </a>
       </div>
-      <img id="logo" src="./assets/Taskea_logo.png" />
+      <img id="logo" src="./assets/Taskea_logo.png" alt="Logo" />
       <div class="conta" id="conta">
         <span id="triangle" class="material-symbols-outlined">arrow_drop_up</span>
         <span id="account" class="material-symbols-outlined">account_circle</span>
@@ -42,25 +70,11 @@
         </div>
       </div>
     </div>
-    
-    <!-- Botão "Excluir selecionadas" -->
-      <div id="acoes-excluir">
-          <button id="excluir-selecionadas">Excluir selecionadas</button>
-          <button id="cancelar-exclusao" style="background-color: #ccc;
-          color: white;
-          border: none;
-          padding: 0.5em 1em;
-          border-radius: 20px;
-          cursor: pointer;
-          font-weight: 600;
-          font: inherit;">Cancelar</button>
-      </div>
-    <!-- Mensagem se estiver vazio -->
+
     <p id="mensagem-vazia">Não há tarefas no momento</p>
 
     <div id="lista-tarefas" style="padding: 1em;"></div>
   </div>
-
 <script>
 /* ---------- CONTAS & MENUS (mantido) ---------- */
 const conta     = document.getElementById("conta");

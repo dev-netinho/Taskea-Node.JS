@@ -17,14 +17,14 @@ a {
 
 /* Evitar barra de rolagem na área de trabalho */
 
-html,
-body {
+html, body {
     font-family: var(--fonte-principal);
     height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden;
+    overflow-y: auto;  
 }
 
 /* Cabeçalho */
@@ -183,17 +183,6 @@ body {
 
 }
 
-#excluir-selecionadas {
-    background-color: #c1121f;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    font: inherit;
-}
-
 #mensagem-vazia {
     display: none;
     color: gray;
@@ -294,7 +283,13 @@ h1 {
 
 /* Media query para telas com largura máxima de 768px */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
+
+    .margin-top {
+        width: 100%; 
+        height: 20%;
+    }
+
     #acoes-excluir {
         display: flex;
         gap: 0.5em;
