@@ -1,0 +1,106 @@
+/* Atribuições gerais */
+:root {
+    --cor-primaria: #FFF;
+    --cor-secundaria: #38637E;
+    --cor-terciaria: #223D4D;
+    --cor-quartenaria: #C9D7E0;
+    --fonte-principal: "Inter";
+    --input-width: 13.968em;
+    --input-height: 2.063em;
+    --input-radius: 30em;
+}
+
+body, html {
+    font-family: var(--fonte-principal);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: var(--cor-primaria);
+}
+
+/* Header */
+.container_header {
+    width: 99%;
+    height: 15%;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a {
+    font-size: 1.5em;
+    color: var(--cor-secundaria);
+    text-decoration: none;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Documentation Sections */
+.documentation-section {
+    padding: 2em;
+    margin: 2em auto;
+    width: 80%;
+    max-width: 1200px;
+    background-color: var(--cor-quartenaria);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.documentation-section h1 {
+    font-size: 2.5em;
+    color: var(--cor-terciaria);
+    margin-bottom: 1em;
+}
+
+.documentation-section p {
+    font-size: 1.2em;
+    color: var(--cor-terciaria);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
+
+/* Responsive */
+@media only screen and (max-width: 850px) {
+    .container_header {
+        height: 10%;
+    }
+
+    .header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .documentation-section {
+        width: 90%;
+        padding: 1em;
+    }
+
+    .documentation-section h1 {
+        font-size: 2em;
+    }
+
+    .documentation-section p {
+        font-size: 1em;
+    }
+}
