@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles/developer/styles.css" />
-    <title>Taskea - Documentação Técnica</title>
-  </head>
-  <body>
-    <div class="city">
-      <header class="header">
-        <img class="logo" src="public/assets/taskea.png" alt="Taskea Logo" />
-        <nav class="navigation">
-          <button class="nav-button">EQUIPE</button>
-          <button class="nav-button login">LOGIN</button>
-          <button class="nav-button register">REGISTRAR</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskea</title>
+    <link rel="stylesheet" href="./styles/developer/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./assets/taskea.png" alt="Logo Taskea">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-button">EQUIPE</a></li>
+                <li><a href="#" class="nav-button">LOGIN</a></li>
+                <li><a href="#" class="nav-button">REGISTRAR</a></li>
+            </ul>
         </nav>
-      </header>
-      <main class="main-content">
-        <section class="documentation-section">
-          <div class="documentation-card">
-            <img class="tech-icon" src="public/assets/nodejs.png" alt="Node.js Icon" />
-            <h2 class="documentation-title">Documentação Técnica</h2>
-            <h3 class="documentation-subtitle">do Back-end</h3>
-            <button class="tech-button">Node.Js</button>
-          </div>
-          <div class="documentation-card">
-            <img class="tech-icon" src="public/assets/sqlite.png" alt="SQLite Icon" />
-            <h2 class="documentation-title">Documentação Técnica</h2>
-            <h3 class="documentation-subtitle">do Banco de Dados</h3>
-            <button class="tech-button">SQLite</button>
-          </div>
-          <div class="documentation-card">
-            <img class="tech-icon" src="public/assets/css.png" alt="CSS Icon" />
-            <h2 class="documentation-title">Documentação Técnica</h2>
-            <h3 class="documentation-subtitle">do Front-end</h3>
-            <button class="tech-button">CSS</button>
-          </div>
-        </section>
-      </main>
-    </div>
-  </body>
+    </header>
+
+    <main>
+        <div class="cards-container">
+            <div class="card">
+                <div class="icon-background">
+                    <img src="./assets/nodejs.png" alt="JavaScript Icon" class="icon">
+                </div>
+                <h3>Documentação Técnica do Back-end</h3>
+                <span class="tech-tag">Node.Js</span>
+            </div>
+            <div class="card">
+                <div class="icon-background">
+                    <img src="./assets/sqlite.png" alt="SQLite Icon" class="icon">
+                </div>
+                <h3>Documentação Técnica do Banco de Dados</h3>
+                <span class="tech-tag">SQLite</span>
+            </div>
+            <div class="card">
+                <div class="icon-background">
+                    <img src="./assets/css.png" alt="CSS3 Icon" class="icon">
+                </div>
+                <h3>Documentação Técnica do Front-end</h3>
+                <span class="tech-tag">CSS</span>
+            </div>
+        </div>
+    </main>
+</body>
 </html>

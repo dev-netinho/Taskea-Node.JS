@@ -1,547 +1,143 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-* {
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-html,
-body {
-  margin: 0px;
-  height: 100%;
-}
-/* a blue color as a generic focus style */
-button:focus-visible {
-  outline: 2px solid #4a90e2 !important;
-  outline: -webkit-focus-ring-color auto 5px !important;
-}
-a {
-  text-decoration: none;
-}
+/* No teu style.css existente: */
 
 body {
-  font-family: "Roboto", sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #fbfbfb;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-color: #ffffff; */ /* REMOVA ou comente esta linha */
+    color: #333;
+    line-height: 1.6;
+    position: relative; /* ADICIONE esta linha */
+    /* Se a tua imagem de fundo for muito grande e causar scroll horizontal,
+       podes adicionar 'overflow-x: hidden;' aqui ou no 'html', mas testa primeiro. */
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* Estilos do Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px; /* Espaçamento interno (AUMENTADO) */
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-:root {
-  --grey: rgba(68, 89, 100, 1);
-  --dark-grey: rgba(38, 49, 56, 1);
-  --soft-grey: rgba(223, 223, 223, 1);
-  --background: rgba(251, 251, 251, 1);
-}
-
-.city {
-  background-color: transparent;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-}
-
-.city .div {
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  width: 1920px;
-  height: 1080px;
-  position: relative;
-}
-
-.city .button {
-  all: unset;
-  box-sizing: border-box;
-  position: absolute;
-  width: 218px;
-  height: 83px;
-  top: 57px;
-  left: 1656px;
-}
-
-.city .overlap-group {
-  position: relative;
-  width: 216px;
-  height: 83px;
-  background-color: #38637e;
-  border-radius: 20px;
-}
-
-.city .text-wrapper {
-  position: absolute;
-  width: 197px;
-  top: 25px;
-  left: 10px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .overlap-wrapper {
-  all: unset;
-  box-sizing: border-box;
-  position: absolute;
-  width: 152px;
-  height: 83px;
-  top: 57px;
-  left: 1240px;
-}
-
-.city .div-wrapper {
-  position: relative;
-  width: 150px;
-  height: 83px;
-  background-color: #38637e;
-  border-radius: 20px;
-}
-
-.city .text-wrapper-2 {
-  position: absolute;
-  width: 124px;
-  top: 24px;
-  left: 13px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .overlap-group-wrapper {
-  position: absolute;
-  width: 369px;
-  height: 320px;
-  top: 629px;
-  left: 221px;
-}
-
-.city .overlap {
-  position: relative;
-  width: 365px;
-  height: 320px;
-  background-color: #ebebeb;
-  border-radius: 20px;
-}
-
-.city .text-wrapper-3 {
-  position: absolute;
-  top: 160px;
-  left: 114px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .text-wrapper-4 {
-  position: absolute;
-  width: 253px;
-  top: 132px;
-  left: 56px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .button-2 {
-  position: absolute;
-  width: 203px;
-  height: 270px;
-  top: 20px;
-  left: 82px;
-}
-
-.city .overlap-group-2 {
-  position: absolute;
-  width: 201px;
-  height: 83px;
-  top: 187px;
-  left: 0;
-  background-color: #38637e;
-  border-radius: 20px;
-}
-
-.city .text-wrapper-5 {
-  position: absolute;
-  width: 136px;
-  top: 24px;
-  left: 33px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .image {
-  width: 96px;
-  height: 101px;
-  top: 0;
-  left: 53px;
-  position: absolute;
-  object-fit: cover;
-}
-
-.city .button-3 {
-  position: absolute;
-  width: 369px;
-  height: 320px;
-  top: 629px;
-  left: 1335px;
-}
-
-.city .img {
-  width: 70px;
-  height: 99px;
-  top: 19px;
-  left: 148px;
-  position: absolute;
-  object-fit: cover;
-}
-
-.city .text-wrapper-6 {
-  position: absolute;
-  top: 160px;
-  left: 112px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .button-4 {
-  all: unset;
-  box-sizing: border-box;
-  position: absolute;
-  width: 113px;
-  height: 83px;
-  top: 207px;
-  left: 127px;
-}
-
-.city .overlap-group-3 {
-  position: relative;
-  width: 111px;
-  height: 83px;
-  background-color: #38637e;
-  border-radius: 20px;
-}
-
-.city .text-wrapper-7 {
-  position: absolute;
-  width: 72px;
-  top: 24px;
-  left: 20px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .overlap-2 {
-  position: absolute;
-  width: 369px;
-  height: 320px;
-  top: 629px;
-  left: 778px;
-}
-
-.city .button-5 {
-  position: absolute;
-  width: 369px;
-  height: 320px;
-  top: 0;
-  left: 0;
-}
-
-.city .do-banco-de-dados {
-  position: absolute;
-  top: 160px;
-  left: 76px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .button-6 {
-  all: unset;
-  box-sizing: border-box;
-  position: absolute;
-  width: 152px;
-  height: 83px;
-  top: 207px;
-  left: 108px;
-}
-
-.city .text-wrapper-8 {
-  position: absolute;
-  width: 109px;
-  top: 24px;
-  left: 21px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .image-2 {
-  width: 60px;
-  height: 82px;
-  top: 30px;
-  left: 152px;
-  position: absolute;
-  object-fit: cover;
-}
-
-.city .button-7 {
-  all: unset;
-  box-sizing: border-box;
-  position: absolute;
-  width: 136px;
-  height: 83px;
-  top: 57px;
-  left: 1456px;
-}
-
-.city .overlap-3 {
-  position: relative;
-  width: 134px;
-  height: 83px;
-  background-image: url(/assets/background.webp);
-  background-size: 100% 100%;
-}
-
-.city .text-wrapper-9 {
-  position: absolute;
-  width: 104px;
-  top: 26px;
-  left: 15px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.city .line {
-  width: 150px;
-  left: 1240px;
-  position: absolute;
-  height: 1px;
-  top: 181px;
-  object-fit: cover;
-}
-
-.city .line-2 {
-  width: 134px;
-  left: 1456px;
-  position: absolute;
-  height: 1px;
-  top: 181px;
-  object-fit: cover;
-}
-
-.city .line-3 {
-  width: 216px;
-  left: 1656px;
-  position: absolute;
-  height: 1px;
-  top: 181px;
-  object-fit: cover;
-}
-
-.city .image-3 {
-  width: 669px;
-  height: 172px;
-  top: 16px;
-  left: 56px;
-  position: absolute;
-  object-fit: cover;
-}
-/* Original CSS code should be injected here */
-
-/* Header Styles */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 56px;
-}
-
+/* Estilos para o logo como imagem */
 .logo {
-  width: 669px;
-  height: 172px;
-  object-fit: cover;
+    /* Estilos para o container do logo, se necessário */
 }
 
-.navigation {
-  display: flex;
-  gap: 20px;
+.logo img {
+    height: 75px; /* Altura do logo (AUMENTADO) */
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px; /* Espaçamento entre os botões (AUMENTADO) */
 }
 
 .nav-button {
-  all: unset;
-  box-sizing: border-box;
-  padding: 24px;
-  background-color: #38637e;
-  border-radius: 20px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #34495e;
+    padding: 12px 25px; /* Espaçamento interno do botão (AUMENTADO) */
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1em; /* Tamanho da fonte do botão (AUMENTADO) */
+    transition: background-color 0.3s ease;
 }
 
 .nav-button:hover {
-  background-color: #2c4f63;
+    background-color: #2c3e50;
 }
 
-.nav-button.login {
-  background-image: url(./img/rectangle-1.svg);
-  background-size: 100% 100%;
+/* Estilos do Conteúdo Principal */
+main {
+    padding: 50px 60px; /* Espaçamento interno da seção principal (AUMENTADO) */
 }
 
-/* Main Content Styles */
-.main-content {
-  display: flex;
-  justify-content: center;
-  padding: 40px 0;
+.cards-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px; /* Espaço entre os cards (AUMENTADO) */
+    margin-top: 190px; /* Margem no topo (AUMENTADO) */
 }
 
-.documentation-section {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 1600px;
+.card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px; /* Espaçamento interno do card (AUMENTADO) */
+    width: 320px; /* Largura para cada card (AUMENTADO) */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.documentation-card {
-  width: 365px;
-  height: 320px;
-  background-color: #ebebeb;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-.tech-icon {
-  width: 96px;
-  height: 101px;
-  object-fit: cover;
-}
-
-.documentation-title {
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  text-align: center;
-}
-
-.documentation-subtitle {
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  text-align: center;
-}
-
-.tech-button {
-  all: unset;
-  box-sizing: border-box;
-  padding: 24px 40px;
-  background-color: #38637e;
-  border-radius: 20px;
-  font-family: "Roboto-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 36px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.tech-button:hover {
-  background-color: #2c4f63;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .documentation-section {
-    flex-direction: column;
+.icon-background {
+    background-color: #e9ecef;
+    border-radius: 8px;
+    padding: 20px; /* Espaçamento interno da área do ícone (AUMENTADO) */
+    margin: 0 auto 25px auto; /* Margem abaixo (AUMENTADO) */
+    width: 85px; /* Largura da área do ícone (AUMENTADO) */
+    height: 85px; /* Altura da área do ícone (AUMENTADO) */
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 40px;
-  }
+}
 
-  .header {
-    flex-direction: column;
-    gap: 20px;
-  }
+.card .icon {
+    width: 55px; /* Tamanho do ícone SVG (AUMENTADO) */
+    height: 55px; /* Altura do ícone SVG (AUMENTADO) */
+}
 
-  .logo {
+.card h3 {
+    font-size: 1.3em; /* Tamanho da fonte do título (AUMENTADO) */
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 20px; /* Margem abaixo do título (AUMENTADO) */
+    min-height: 45px; /* Altura mínima para alinhar títulos (AJUSTADO para nova fonte) */
+}
+
+.tech-tag {
+    display: inline-block;
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 12px 30px; /* Espaçamento interno da tag (AUMENTADO) */
+    border-radius: 20px;
+    font-size: 1.1em; /* Tamanho da fonte da tag (AUMENTADO) */
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: default;
+}
+
+/* ADICIONE ESTE NOVO BLOCO DE CÓDIGO NO FINAL DO TEU CSS (ou numa secção apropriada) */
+body::before {
+    content: ""; /* Necessário para pseudo-elementos */
+    position: fixed; /* Faz com que o fundo fique fixo e não role com a página */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    max-width: 669px;
-  }
+    height: 100%;
+    z-index: -1; /* Coloca o pseudo-elemento atrás de todo o conteúdo */
 
-  .navigation {
-    flex-direction: column;
-    width: 100%;
-  }
+    background-image: url('../../assets/background.png'); /* SUBSTITUA PELO CAMINHO REAL DA SUA IMAGEM */
+    background-size: cover; /* Faz a imagem cobrir toda a área, pode cortar partes da imagem */
+    background-position: center center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
 
-  .nav-button {
-    width: 100%;
-  }
+    opacity: 0.45; /* Aqui está a sua opacidade de 45% */
 }
