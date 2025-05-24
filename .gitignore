@@ -27,3 +27,4 @@ logs
 # Diretório de build
 /build
 /dist
+taskea-docs/build/
