@@ -3,50 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskea</title>
-    <link rel="stylesheet" href="./styles/developer/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Taskea - Documentação & Recursos</title>
+    <link rel="stylesheet" href="./styles/developer/styles.css"> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="/home.html">
-              <img src="./assets/taskea.png" alt="Logo Taskea">
-            </a>
+            <a href="/home.html"> <img src="./assets/taskea.png" alt="Logo Taskea"> </a>
         </div>
         <nav>
             <ul>
-                <li><a href="/equipe.html" class="nav-button">EQUIPE</a></li>
-                <li><a href="/login.html" class="nav-button">LOGIN</a></li>
-                <li><a href="/register.html" class="nav-button">REGISTRAR</a></li>
+                <li><a href="/public/quem_somos.html" class="nav-button">EQUIPE</a></li>
+                <li><a href="/public/login.html" class="nav-button">LOGIN</a></li>
+                <li><a href="/public/register.html" class="nav-button">REGISTRAR</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-    <div class="cards-container">
-        <div class="card">
-            <div class="icon-background">
-                <img src="./assets/nodejs.png" alt="JavaScript Icon" class="icon">
-            </div>
-            <h3>Documentação Técnica do Back-end</h3>
-            <a href="https://thorough-mercy-production-786a.up.railway.app/backend/DocumentacaoTecnicadoBackend-ProjetoTaskea" class="tech-tag" target="_blank" rel="noopener noreferrer">Node.Js</a>
+    <div class="container">
+        <div class="content-introduction">
+            <h1>Recursos para Desenvolvedores</h1>
+            <p>Explore nossa documentação técnica e guias para integrar e contribuir com o Taskea. Tudo o que você precisa para começar está aqui.</p>
         </div>
-        <div class="card">
-            <div class="icon-background">
-                <img src="./assets/sqlite.png" alt="SQLite Icon" class="icon">
+
+        <main>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="icon-background">
+                        <img src="./assets/nodejs.png" alt="Ícone Node.js" class="icon"> </div>
+                    <h3>Documentação Técnica do Back-end</h3>
+                    <a href="https://thorough-mercy-production-786a.up.railway.app/backend/DocumentacaoTecnicadoBackend-ProjetoTaskea" class="tech-tag" target="_blank" rel="noopener noreferrer">Node.Js</a>
+                </div>
+                <div class="card">
+                    <div class="icon-background">
+                        <img src="./assets/sqlite.png" alt="Ícone SQLite" class="icon"> </div>
+                    <h3>Documentação Técnica do Banco de Dados</h3>
+                    <a href="https://thorough-mercy-production-786a.up.railway.app/database/DocumentacaoTecnicadoBancodeDados-Projeto%20Taskea" class="tech-tag" target="_blank" rel="noopener noreferrer">SQLite</a>
+                </div>
+                <div class="card">
+                    <div class="icon-background">
+                        <img src="./assets/css.png" alt="Ícone CSS3" class="icon"> </div>
+                    <h3>Documentação Técnica do Front-end</h3>
+                    <a href="https://thorough-mercy-production-786a.up.railway.app/frontend/estilizacao" class="tech-tag" target="_blank" rel="noopener noreferrer">CSS</a>
+                </div>
             </div>
-            <h3>Documentação Técnica do Banco de Dados</h3>
-            <a href="https://thorough-mercy-production-786a.up.railway.app/database/DocumentacaoTecnicadoBancodeDados-Projeto%20Taskea" class="tech-tag" target="_blank" rel="noopener noreferrer">SQLite</a>
-        </div>
-        <div class="card">
-            <div class="icon-background">
-                <img src="./assets/css.png" alt="CSS3 Icon" class="icon">
-            </div>
-            <h3>Documentação Técnica do Front-end</h3>
-            <a href="https://thorough-mercy-production-786a.up.railway.app/frontend/estilizacao" class="tech-tag" target="_blank" rel="noopener noreferrer">CSS</a>
-        </div>
+        </main>
     </div>
-</main>
+
+    <footer>
+        <p>&copy; 2024 Taskea. Todos os direitos reservados.</p>
+    </footer>
+
 </body>
 </html>

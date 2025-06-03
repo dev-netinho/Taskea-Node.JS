@@ -19,7 +19,12 @@ body {
     background-color: var(--cor-quartenaria);
 }
 
-input, a {
+/* Removido 'all: unset;' global para 'a' para melhor controle por classes */
+/* input, a {
+    all: unset;
+} */
+
+input {
     all: unset;
 }
 
@@ -32,52 +37,51 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-#already_account, #cadastrar {
-    cursor: pointer;
-}
-
 img {
-    width: 10%;       
+    width: 200px; /* Largura fixa mais razoável para o logo */
+    max-width: 40%; /* Para não ficar enorme em telas pequenas */
     height: auto;
-} 
+}
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    gap: 3em;
+    min-height: 100vh; /* Usar min-height para permitir conteúdo maior que a tela */
+    padding: 2em 0; /* Adicionar padding vertical para evitar corte */
+    gap: 2em; /* Reduzido um pouco o gap */
 }
 
 .geometric-box {
     background-color: var(--cor-primairia);
-    padding: 4em;
-    border-radius: 2.886em;
-    max-width: 25em;
-    width: 100%;
+    padding: 3em; /* Reduzido um pouco o padding */
+    border-radius: 2em; /* Reduzido um pouco o border-radius */
+    max-width: 23em; /* Reduzido um pouco */
+    width: 90%; /* Para melhor responsividade em telas estreitas */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
-
     color: var(--cor-terciaria);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
 }
 
 /* Comportamento dos campos de preenchimento e acesso */
 
 input {
-    width: 20.968em;
-    height: 2.053em;  
+    width: 100%; /* Inputs ocupam a largura do form */
+    height: 2.053em;
     border-radius: 2.016em;
+    box-sizing: border-box; /* Importante para padding não aumentar a largura */
 }
 
-form {
+form.geometric { /* Renomeado para ser mais específico se houver outros forms */
     display: flex;
     flex-direction: column;
     align-self: center;
-    
-    gap: 0.5em;
+    width: 100%; /* Form ocupa a largura da .inputs div */
+    gap: 0.75em; /* Aumentado o gap entre os inputs */
 }
 
 input::placeholder {
@@ -87,51 +91,58 @@ input::placeholder {
 
 /* Nome de usuário, email e senha */
 
-#username, #email, #password, #cadastro_botao {
+#username, #email, #password { /* Removido #cadastro_botao daqui */
     background-color: var(--cor-quartenaria);
     padding: 0.5em 1em;
     color: var(--cor-secundaria);
 }
 
 #password {
-    margin-bottom: 5%;
+    margin-bottom: 0.5em; /* Reduzido o margin-bottom */
 }
 
-/* Personalização do botão de "Cadastrar" */
-
+/* Personalização do botão de "Entrar" */
 #cadastro_botao {
+    all: unset; /* Reset específico para o botão */
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75em 1em; /* Aumentado padding vertical */
     text-align: center;
     background-color: var(--cor-secundaria);
     color: var(--cor-terciaria);
-
+    border-radius: 2.016em;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease-in-out; /* Transição mais suave */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 #cadastro_botao:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    background-color: #2c4e63; /* Tom mais escuro de --cor-secundaria */
+    transform: translateY(-2px); /* Efeito de levantar */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 #cadastro_botao:active {
-  transform: scale(0.95);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transform: translateY(0px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
-/* Configurações do título "Cadastrar" */
+/* Configurações do título "Login" */
 
-.cadastro, #cadastro_logo {
+.cadastro { /* Removido #cadastro_logo daqui, pois não está no HTML */
     display: flex;
     align-items: center;
     font-size: 1.833em;
-
     gap: 0.2em;
+    margin-bottom: 0.5em; /* Adicionado espaço abaixo do título */
+}
+#cadastro_logo { /* Estilo para o ícone ao lado do título */
+    font-size: 1em; /* Para ter o mesmo tamanho do texto do título */
 }
 
-/* Input com ícone */
+
+/* Input com ícone (Se você usar inputs com ícones, mantenha. Caso contrário, pode remover) */
 .input-icon {
     position: relative;
     width: 100%;
@@ -154,22 +165,23 @@ input::placeholder {
     pointer-events: none;
 }
 
-/* Ajuste para inputs dentro do form */
-form.geometric {
+/* Div que agrupa os inputs */
+.inputs {
     width: 100%;
-    max-width: 21em;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
+
 /* Opções abaixo dos inputs */
-/* O width dessa classe é improvisado para criar uma largura idêntica com os inputs acima, ou seja, uma gambiarra */
 .options {
-    width: 110%;
+    width: 100%; /* Ocupa a largura do form */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
-    font-size: 0.98em;
+    margin-bottom: 1.2em; /* Aumentado o espaço antes do botão Entrar */
+    font-size: 0.9em; /* Reduzido um pouco */
     color: var(--cor-terciaria);
 }
 
@@ -180,55 +192,94 @@ form.geometric {
     cursor: pointer;
 }
 
-.options input[type="checkbox"] {
-    accent-color: var(--cor-secundaria);
-    width: 1em;
-    height: 1em;
-    margin-right: 0.2em;
-}
-
 .options .forgot {
+    all: unset; /* Reset para o link "Esqueceu a senha?" */
     color: var(--cor-terciaria);
     text-decoration: underline;
     cursor: pointer;
-    font-size: 0.98em;
+    font-size: 1em; /* Para ter o mesmo tamanho do "Lembrar acesso" */
 }
+.options .forgot:hover {
+    text-decoration: none;
+}
+
+
+/* Estilos para links secundários (Não tem conta?, Documentação) */
+.secondary-link {
+    all: unset; /* Garante reset total antes de aplicar estilos */
+    display: block;
+    color: var(--cor-terciaria);
+    font-size: 0.9em;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 0.75em; /* Espaçamento entre eles e acima do primeiro */
+    line-height: 1.4;
+}
+
+.secondary-link strong {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.secondary-link:hover strong {
+    text-decoration: none; /* Opcional: remover sublinhado no hover */
+    color: var(--cor-quartenaria); /* Leve destaque no hover */
+}
+
+/* Se precisar de estilo específico para o link de documentação */
+.documentation-link {
+    /* Pode adicionar estilos específicos aqui se necessário */
+}
+
 
 @media (max-width: 600px) {
     .container {
         gap: 1.5em;
+        padding: 1em 0;
     }
 
     .geometric-box {
-        padding: 2em;
+        padding: 2em 1.5em; /* Ajustado padding horizontal */
         border-radius: 1.5em;
-        max-width: 80vw;
-        gap: 0.5em;
+        max-width: 90vw; /* Max-width para não ficar colado nas bordas */
+        gap: 0.75em; /* Ajustado gap interno */
     }
 
-    input {
-        width: 90vw;
-        max-width: 18em;
-        height: 1.5em;
-        font-size: 1em;
+    /* Inputs e form no mobile */
+    /* A largura dos inputs já é 100% do form, que é 100% de .inputs */
+    /* Não precisa de width: 90vw nos inputs diretamente */
+
+    #username, #email, #password {
+        height: 1.8em; /* Ajuste de altura */
+        font-size: 0.95em; /* Ajuste de fonte */
+    }
+     #cadastro_botao {
+        padding: 0.7em 1em;
+        font-size: 0.95em;
     }
 
-    .cadastro, #cadastro_logo {
-        font-size: 1.2em;
-        gap: 0.1em;
+
+    .cadastro {
+        font-size: 1.5em; /* Título do login menor */
     }
 
     img {
-        width: 40%;
+        width: 150px; /* Tamanho mais consistente para o logo no mobile */
+        max-width: 35%;
     }
 
-    form.geometric {
-        max-width: 18em;
-    }
-    .input-icon input {
-        font-size: 1em;
-    }
     .options {
-        font-size: 0.95em;
+        font-size: 0.85em; /* Texto das opções menor */
+        flex-direction: column; /* Empilhar "Lembrar" e "Esqueceu senha" */
+        align-items: flex-start; /* Alinhar à esquerda */
+        gap: 0.5em; /* Espaço entre os itens empilhados */
+        margin-bottom: 1em;
+    }
+    .options .forgot {
+        align-self: flex-end; /* "Esqueceu a senha" à direita */
+    }
+
+    .secondary-link {
+        font-size: 0.85em;
     }
 }
