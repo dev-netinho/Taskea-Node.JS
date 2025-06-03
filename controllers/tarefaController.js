@@ -1,19 +1,24 @@
 const Tarefa = require('../models/Tarefa.js');
 
 exports.criarTarefa = async (req, res) => {
-    const {titulo, descricao, usuario_id} = req.body;
+    const {titulo, descricao} = req.body;
 
     if (!titulo || !descricao) {
         return res.status(400).json({ mensagem: 'Título e descrição são obrigatórios.' });
     }
-    
-    const tarefa = await Tarefa.create(req.body);
+
+    const tarefa = await Tarefa.create({
+        titulo,
+        descricao,
+        usuario_id: req.usuario.id
+    });
 
     res.status(201).json({ mensagem: 'Tarefa criada com sucesso.', tarefa});
 };
 
 exports.listarTarefas = async (req, res) => {
     const tarefasDoUsuario = await Tarefa.findAll({
+        where: {usuario_id: req.usuario.id},
         attributes: {exclude: ['UsuarioId']},
     }); 
     res.json(tarefasDoUsuario);
