@@ -163,15 +163,21 @@ input::placeholder {
     text-decoration: none;
 }
 
-.secondary-link strong {
+.secondary-link strong,
+.secondary-link:link strong,
+.secondary-link:visited strong {
     font-weight: bold;
     text-decoration: underline;
-    color: var(--cor-terciaria) !important; /* <--- ADICIONADO AQUI! */
+    color: var(--cor-terciaria) !important; /* Força a cor para branco também nos estados link e visited */
 }
 
 .secondary-link:hover strong {
     text-decoration: none;
-    color: var(--cor-quartenaria);
+    color: var(--cor-quartenaria); /* Cor ao passar o mouse */
+}
+
+.secondary-link:active strong {
+    color: var(--cor-terciaria); /* Mantém branco ao clicar */
 }
 
 /* MEDIA QUERIES */

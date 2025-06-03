@@ -249,16 +249,24 @@ input::placeholder {
         font-size: 0.9em;
     }
 
+    /* ****************************************************************** */
+    /* AQUI ESTÁ A CORREÇÃO PARA "LEMBRAR ACESSO" E "ESQUECEU A SENHA?" */
+    /* ****************************************************************** */
     .options {
         font-size: 0.8em;
-        flex-direction: column; /* Empilha os itens */
-        align-items: center; /* Centraliza os itens empilhados */
-        gap: 0.8em;
+        flex-direction: row; /* ALTERADO PARA FICAR HORIZONTAL */
+        justify-content: space-between; /* DISTRIBUI ESPAÇO ENTRE ELES */
+        align-items: center; /* ALINHA VERTICALMENTE NO CENTRO */
+        gap: 0.5em; /* Pequeno gap caso a tela seja muito pequena */
         margin-bottom: 0.8em;
+        padding: 0 0.5em; /* Adiciona padding horizontal */
+        box-sizing: border-box; /* Garante que o padding não aumente a largura */
     }
     .options .forgot {
-        align-self: center; /* Centraliza "Esqueceu a senha?" */
+        align-self: auto; /* RESETA O ALINHAMENTO ESPECÍFICO SE NECESSÁRIO */
     }
+    /* ****************************************************************** */
+
 
     .secondary-link {
         font-size: 0.8em;
