@@ -9,10 +9,12 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: #374151;
     line-height: 1.6;
-    background-color: #f0f2f5; /* Um cinza um pouco diferente e comum para fundos */
-    /* Espaço para o header fixo + um respiro adicional.
-       Se o header tem 80px, 80px + 20px (respiro) = 100px. Ajuste conforme necessário. */
-    padding-top: 170px; /* AUMENTADO para dar mais espaço abaixo do header */
+    background-color: #f0f2f5;
+    /* Ajuste do padding-top baseado na altura do header para evitar sobreposição */
+    padding-top: 80px; /* Valor inicial para telas maiores, baseado na altura do header */
+    min-height: 100vh; /* Garante que o body ocupa no mínimo 100% da viewport */
+    display: flex; /* Adicionado para permitir o rodapé fixo na parte inferior da tela se o conteúdo for curto */
+    flex-direction: column; /* Conteúdo organiza-se em coluna */
 }
 
 /* Estilos do Cabeçalho */
@@ -28,7 +30,8 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
-    height: 80px; /* Definir uma altura fixa pode ajudar no cálculo do padding-top do body */
+    height: 80px; /* Manter altura fixa para facilitar cálculo do padding-top do body */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra suave para o header */
 }
 
 .logo img {
@@ -58,6 +61,7 @@ nav ul li {
     font-size: 0.875rem;
     transition: background-color 0.3s ease;
     text-transform: uppercase;
+    white-space: nowrap; /* Evita que o texto do botão quebre */
 }
 
 .nav-button:hover {
@@ -67,19 +71,19 @@ nav ul li {
 /* Container principal do conteúdo - Agora como um painel destacado */
 .container {
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2.5rem 2rem; /* Padding interno do painel */
-    background-color: #ffffff; /* Fundo branco para o painel de conteúdo */
-    border-radius: 0.5rem; /* Cantos arredondados para o painel */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra sutil para o painel */
-    margin-bottom: 3rem; /* Espaço antes do rodapé */
+    width: 90%; /* Ajuste para melhor responsividade */
+    margin: 3rem auto; /* Ajustado para centralizar e dar margem superior/inferior */
+    padding: 2.5rem 2rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    flex-grow: 1; /* Permite que o container cresça para empurrar o footer para baixo */
 }
 
-/* Título e Introdução do Conteúdo - Integrado ao painel */
+/* Título e Introdução do Conteúdo */
 .content-introduction {
     text-align: center;
-    margin-bottom: 3rem; /* Espaço entre a introdução e os cards */
+    margin-bottom: 3rem;
 }
 
 .content-introduction h1 {
@@ -87,36 +91,36 @@ nav ul li {
     color: #1f2937;
     margin-bottom: 1rem;
     font-weight: 700;
+    line-height: 1.2; /* Melhorar espaçamento da linha para títulos */
 }
 
 .content-introduction p {
     font-size: 1.1rem;
     color: #6b7280;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto; /* Centraliza o parágrafo */
     line-height: 1.7;
 }
 
 /* Estilos do Conteúdo Principal (onde os cards estão) */
 main {
-    /* Não precisa de padding específico aqui se o .container já tem */
+    padding-bottom: 1rem; /* Um pequeno padding antes do footer */
 }
 
 .cards-container {
     display: flex;
-    justify-content: center; /* Centraliza os cards se houver espaço extra */
-    align-items: stretch;
+    justify-content: center;
+    align-items: stretch; /* Garante que todos os cards tenham a mesma altura */
     flex-wrap: wrap;
     gap: 2rem;
 }
 
 .card {
     background-color: #fdfdff;
-    border: 1px solid #e5e7eb; /* Borda sutil nos cards */
+    border: 1px solid #e5e7eb;
     border-radius: 0.75rem;
     padding: 1.5rem;
-    width: 300px;
+    width: 300px; /* Largura base do card */
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -127,7 +131,7 @@ main {
 .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-    border-color: #4338ca; /* Borda roxa no hover inteiro do card */
+    border-color: #4338ca;
 }
 
 .icon-background {
@@ -158,7 +162,7 @@ main {
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 1rem;
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que o h3 ocupe espaço para alinhar o tech-tag na parte inferior */
 }
 
 .tech-tag {
@@ -172,7 +176,7 @@ main {
     text-transform: uppercase;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin-top: auto;
+    margin-top: auto; /* Empurra o tech-tag para o final do card */
 }
 
 .tech-tag:hover {
@@ -183,22 +187,24 @@ main {
 footer {
     text-align: center;
     padding: 1.5rem 1rem;
-    background-color: #eef2ff; /* Fundo sutil para o rodapé */
+    background-color: #eef2ff;
     color: #4b5563;
     border-top: 1px solid #e0e0e0;
     font-size: 0.9rem;
+    width: 100%; /* Garante que o footer ocupe toda a largura */
 }
 
 /* Media Queries para Responsividade */
 @media (max-width: 1200px) {
     .cards-container {
-        justify-content: space-around;
+        justify-content: space-around; /* Se precisar de mais espaçamento entre cards */
     }
 }
 
 @media (max-width: 992px) {
     .card {
-        width: calc(50% - 1rem);
+        /* Permite 2 cards por linha com gap */
+        width: calc(50% - 1rem); /* 1rem é metade do gap de 2rem */
     }
     .content-introduction h1 {
         font-size: 2rem;
@@ -206,34 +212,35 @@ footer {
     .content-introduction p {
         font-size: 1.05rem;
     }
+    .container {
+        width: 95%; /* Ocupa mais largura em telas menores */
+    }
 }
 
 @media (max-width: 768px) {
     body {
-        /* Ajustar para altura do header mobile se ele mudar + respiro */
-        /* Se o header mobile for menor, ex: 60px + 15px respiro = 75px */
-        padding-top: 75px;
+        padding-top: 130px; /* Ajuste para acomodar o header empilhado + respiro */
     }
     header {
-        flex-direction: column;
-        padding: 10px 20px;
-        height: auto; /* Altura auto para header mobile */
+        flex-direction: column; /* Empilha logo e nav */
+        padding: 15px 20px;
+        height: auto; /* Altura automática para header empilhado */
     }
     .logo {
-        margin-bottom: 10px;
+        margin-bottom: 15px; /* Espaço entre logo e nav empilhados */
     }
     nav ul {
         margin-top: 0;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-wrap: wrap; /* Permite que os botões quebrem a linha se necessário */
+        justify-content: center; /* Centraliza botões */
     }
     nav ul li {
-        margin: 5px 7px;
+        margin: 5px 10px; /* Ajuste do espaçamento dos itens de navegação */
     }
 
     .container {
         padding: 2rem 1.5rem;
-        margin-bottom: 2rem;
+        margin: 2rem auto; /* Ajuste de margem para mobile */
     }
     .content-introduction h1 {
         font-size: 1.8rem;
@@ -243,12 +250,12 @@ footer {
     }
 
     .cards-container {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: column; /* Cards em coluna */
+        align-items: center; /* Centraliza cards */
     }
     .card {
         width: 100%;
-        max-width: 400px;
+        max-width: 350px; /* Limita a largura do card para não ficar gigante em tablets */
         margin-bottom: 1.5rem;
     }
     .card:last-child {
@@ -258,14 +265,13 @@ footer {
 
 @media (max-width: 480px) {
     body {
-         /* Se o header mobile for ainda menor, ex: 55px + 15px respiro = 70px */
-        padding-top: 70px;
+        padding-top: 110px; /* Ajuste para header ainda mais compacto */
     }
     .logo img {
-        height: 40px;
+        height: 45px; /* Logo um pouco menor */
     }
     .nav-button {
-        font-size: 0.8rem;
+        font-size: 0.75rem; /* Botões menores */
         padding: 0.5rem 0.8rem;
     }
 
@@ -273,7 +279,7 @@ footer {
         font-size: 1.6rem;
     }
     .content-introduction p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
     .container {
         padding: 1.5rem 1rem;
