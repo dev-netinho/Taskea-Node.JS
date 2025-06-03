@@ -148,37 +148,38 @@ input::placeholder {
 }
 
 /* Estilos para links secundários (Já tem conta?) */
+/* AQUI ESTÁ A CORREÇÃO FINAL PARA A COR E O SUBLINHADO */
 .secondary-link,
 .secondary-link:link,
 .secondary-link:visited,
 .secondary-link:hover,
 .secondary-link:active {
     display: block;
-    color: var(--cor-terciaria) !important; /* Força a cor para branco */
+    color: var(--cor-terciaria) !important; /* Força a cor para branco em todos os estados do link */
     font-size: 0.95em;
     text-align: center;
     cursor: pointer;
     margin-top: 0.8em;
     line-height: 1.4;
-    text-decoration: none;
+    text-decoration: none !important; /* Remove qualquer sublinhado do link A em todos os estados */
 }
 
+/* Garante que o STRONG dentro do link esteja branco e com sublinhado apenas no padrão */
 .secondary-link strong,
 .secondary-link:link strong,
 .secondary-link:visited strong {
     font-weight: bold;
-    text-decoration: underline;
-    color: var(--cor-terciaria) !important; /* Força a cor para branco também nos estados link e visited */
+    text-decoration: underline !important; /* Garante o sublinhado APENAS no strong */
+    color: var(--cor-terciaria) !important; /* Força a cor para branco no strong em todos os estados */
 }
 
+/* Comportamento ao passar o mouse (hover) */
 .secondary-link:hover strong {
-    text-decoration: none;
-    color: var(--cor-quartenaria); /* Cor ao passar o mouse */
+    text-decoration: none !important; /* Remove o sublinhado do strong no hover */
+    color: var(--cor-quartenaria) !important; /* Leve destaque no hover */
 }
+/* FIM DA CORREÇÃO PARA A COR E O SUBLINHADO */
 
-.secondary-link:active strong {
-    color: var(--cor-terciaria); /* Mantém branco ao clicar */
-}
 
 /* MEDIA QUERIES */
 @media (max-width: 600px) {
