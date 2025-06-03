@@ -2,33 +2,39 @@
 
 :root {
     --fonte-principal: "Inter";
-    --cor-primairia: #38637E;
+    --cor-primaria: #38637E; /* Corrigido para primArIA */
     --cor-secundaria: #223D4D;
     --cor-terciaria: #FFFFFF;
     --cor-quartenaria: #e3ebf0;
 }
 
+/* Garante que o corpo ocupa a altura total da viewport e remove margens padrão */
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%; /* Garante que ocupa 100% da largura disponível */
+    height: 100%; /* Garante que ocupa 100% da altura disponível */
+    box-sizing: border-box; /* Inclui padding e border na largura/altura */
 }
 
 body {
     font-family: var(--fonte-principal);
     background-color: var(--cor-quartenaria);
+    display: flex; /* Usar flexbox no body para centralizar o container */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    min-height: 100vh; /* Garante que o body tenha pelo menos a altura da tela */
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
-/* Removido 'all: unset;' global para 'a' para melhor controle por classes */
-/* input, a {
-    all: unset;
-} */
-
+/* Reset específico para elementos */
 input {
-    all: unset;
+    all: unset; /* Mantém o reset para inputs */
+    box-sizing: border-box; /* Adicionado para garantir que padding e border não aumentem o tamanho */
 }
 
 input[type="checkbox"] {
+    /* Mantém como está, é um bom reset seletivo */
     all: revert;
     accent-color: var(--cor-secundaria);
     width: 1em;
@@ -38,9 +44,9 @@ input[type="checkbox"] {
 }
 
 img {
-    width: 200px; /* Largura fixa mais razoável para o logo */
-    max-width: 40%; /* Para não ficar enorme em telas pequenas */
-    height: auto;
+    width: 180px; /* Um tamanho fixo que parece bom em ambos */
+    max-width: 40%; /* Garante que não fique gigante em telas maiores */
+    height: auto; /* Mantém a proporção */
 }
 
 .container {
@@ -48,32 +54,39 @@ img {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 100vh; /* Usar min-height para permitir conteúdo maior que a tela */
-    padding: 2em 0; /* Adicionar padding vertical para evitar corte */
-    gap: 2em; /* Reduzido um pouco o gap */
+    min-height: 100vh; /* Permite que o conteúdo empurre a altura se necessário */
+    padding: 2em 0; /* Adiciona padding vertical para evitar que o conteúdo encoste nas bordas */
+    gap: 2em; /* Espaçamento entre o logo e a caixa geométrica */
+    width: 90%; /* Limita a largura do container para não ficar muito largo em desktops */
+    max-width: 500px; /* Define um limite máximo de largura para o container */
 }
 
 .geometric-box {
-    background-color: var(--cor-primairia);
-    padding: 3em; /* Reduzido um pouco o padding */
-    border-radius: 2em; /* Reduzido um pouco o border-radius */
-    max-width: 23em; /* Reduzido um pouco */
-    width: 90%; /* Para melhor responsividade em telas estreitas */
+    background-color: var(--cor-primaria);
+    padding: 2.5em; /* Ajustado para um valor médio e consistente */
+    border-radius: 1.8em; /* Ajustado para um valor consistente */
+    max-width: 25em; /* Valor mais flexível */
+    width: 90%; /* Ocupa 90% da largura do pai */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1.2em; /* Espaçamento entre os elementos dentro da caixa */
     color: var(--cor-terciaria);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    box-sizing: border-box; /* Adicionado para consistência */
 }
 
 /* Comportamento dos campos de preenchimento e acesso */
 
 input {
-    width: 100%; /* Inputs ocupam a largura do form */
-    height: 2.053em;
+    width: 100%; /* Inputs devem ocupar 100% do seu container pai */
+    height: 2.5em; /* Aumentei um pouco a altura para melhor usabilidade */
     border-radius: 2.016em;
-    box-sizing: border-box; /* Importante para padding não aumentar a largura */
+    padding: 0.5em 1em; /* Adicionado padding para o texto não ficar colado */
+    box-sizing: border-box; /* Essencial para o padding não 'estourar' a largura */
+    font-size: 1em; /* Tamanho da fonte base para os inputs */
+    color: var(--cor-secundaria); /* Cor do texto digitado */
+    background-color: var(--cor-quartenaria); /* Cor de fundo */
 }
 
 form.geometric { /* Renomeado para ser mais específico se houver outros forms */
@@ -81,24 +94,12 @@ form.geometric { /* Renomeado para ser mais específico se houver outros forms *
     flex-direction: column;
     align-self: center;
     width: 100%; /* Form ocupa a largura da .inputs div */
-    gap: 0.75em; /* Aumentado o gap entre os inputs */
+    gap: 1em; /* Aumentado o gap entre os inputs */
 }
 
 input::placeholder {
     color: #757575;
     text-align: left;
-}
-
-/* Nome de usuário, email e senha */
-
-#username, #email, #password { /* Removido #cadastro_botao daqui */
-    background-color: var(--cor-quartenaria);
-    padding: 0.5em 1em;
-    color: var(--cor-secundaria);
-}
-
-#password {
-    margin-bottom: 0.5em; /* Reduzido o margin-bottom */
 }
 
 /* Personalização do botão de "Entrar" */
@@ -115,6 +116,7 @@ input::placeholder {
     cursor: pointer;
     transition: all 0.2s ease-in-out; /* Transição mais suave */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 0.5em; /* Adicionado um pequeno espaçamento superior */
 }
 
 #cadastro_botao:hover {
@@ -130,39 +132,20 @@ input::placeholder {
 
 /* Configurações do título "Login" */
 
-.cadastro { /* Removido #cadastro_logo daqui, pois não está no HTML */
+.cadastro {
     display: flex;
     align-items: center;
-    font-size: 1.833em;
-    gap: 0.2em;
-    margin-bottom: 0.5em; /* Adicionado espaço abaixo do título */
+    font-size: 2em; /* Aumentei um pouco para um visual mais impactante */
+    gap: 0.4em; /* Espaçamento entre o título e o ícone */
+    margin-bottom: 0.8em; /* Espaço abaixo do título */
+    justify-content: center; /* Centraliza o título e o ícone */
 }
+#cadastro_titulo {
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+}
+
 #cadastro_logo { /* Estilo para o ícone ao lado do título */
     font-size: 1em; /* Para ter o mesmo tamanho do texto do título */
-}
-
-
-/* Input com ícone (Se você usar inputs com ícones, mantenha. Caso contrário, pode remover) */
-.input-icon {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5em;
-}
-
-.input-icon input {
-    width: 100%;
-    padding-left: 2.5em;
-    box-sizing: border-box;
-}
-
-.input-icon .material-icons {
-    position: absolute;
-    left: 0.8em;
-    color: #757575;
-    font-size: 1.3em;
-    pointer-events: none;
 }
 
 /* Div que agrupa os inputs */
@@ -172,7 +155,6 @@ input::placeholder {
     flex-direction: column;
     align-items: center;
 }
-
 
 /* Opções abaixo dos inputs */
 .options {
@@ -193,7 +175,6 @@ input::placeholder {
 }
 
 .options .forgot {
-    all: unset; /* Reset para o link "Esqueceu a senha?" */
     color: var(--cor-terciaria);
     text-decoration: underline;
     cursor: pointer;
@@ -203,22 +184,21 @@ input::placeholder {
     text-decoration: none;
 }
 
-
 /* Estilos para links secundários (Não tem conta?, Documentação) */
 .secondary-link {
-    all: unset; /* Garante reset total antes de aplicar estilos */
     display: block;
     color: var(--cor-terciaria);
-    font-size: 0.9em;
+    font-size: 0.95em; /* Levemente maior para melhor leitura */
     text-align: center;
     cursor: pointer;
-    margin-top: 0.75em; /* Espaçamento entre eles e acima do primeiro */
+    margin-top: 0.8em; /* Ajuste o espaçamento */
     line-height: 1.4;
+    text-decoration: none; /* Remove o sublinhado padrão */
 }
 
 .secondary-link strong {
     font-weight: bold;
-    text-decoration: underline;
+    text-decoration: underline; /* Adiciona o sublinhado apenas no strong */
 }
 
 .secondary-link:hover strong {
@@ -226,60 +206,63 @@ input::placeholder {
     color: var(--cor-quartenaria); /* Leve destaque no hover */
 }
 
-/* Se precisar de estilo específico para o link de documentação */
-.documentation-link {
-    /* Pode adicionar estilos específicos aqui se necessário */
-}
-
-
+/* MEDIA QUERIES */
 @media (max-width: 600px) {
     .container {
-        gap: 1.5em;
-        padding: 1em 0;
+        gap: 1em; /* Reduzido o gap para telas menores */
+        padding: 1em; /* Padding em todos os lados */
+        min-height: auto; /* Deixa o container crescer conforme necessário */
     }
 
     .geometric-box {
-        padding: 2em 1.5em; /* Ajustado padding horizontal */
-        border-radius: 1.5em;
-        max-width: 90vw; /* Max-width para não ficar colado nas bordas */
-        gap: 0.75em; /* Ajustado gap interno */
-    }
-
-    /* Inputs e form no mobile */
-    /* A largura dos inputs já é 100% do form, que é 100% de .inputs */
-    /* Não precisa de width: 90vw nos inputs diretamente */
-
-    #username, #email, #password {
-        height: 1.8em; /* Ajuste de altura */
-        font-size: 0.95em; /* Ajuste de fonte */
-    }
-     #cadastro_botao {
-        padding: 0.7em 1em;
-        font-size: 0.95em;
-    }
-
-
-    .cadastro {
-        font-size: 1.5em; /* Título do login menor */
+        padding: 1.5em; /* Reduzido o padding para ocupar menos espaço */
+        border-radius: 1em;
+        max-width: 95vw; /* Ocupa mais largura em telas menores */
+        width: auto; /* Permite que a largura se ajuste automaticamente */
+        gap: 0.8em; /* Espaçamento interno menor */
     }
 
     img {
-        width: 150px; /* Tamanho mais consistente para o logo no mobile */
-        max-width: 35%;
+        width: 120px; /* Logo menor em telas pequenas */
+        max-width: 30%;
+    }
+
+    .cadastro {
+        font-size: 1.4em; /* Título menor para se ajustar */
+        gap: 0.1em;
+        margin-bottom: 0.4em;
+        justify-content: center; /* MUITO IMPORTANTE para centralizar o texto no mobile */
+    }
+
+    #cadastro_logo {
+        font-size: 1em; /* Garante que o ícone acompanhe o tamanho do título */
+    }
+
+    input {
+        height: 2em; /* Altura menor para inputs em mobile */
+        font-size: 0.9em;
+        padding: 0.4em 0.8em; /* Ajusta padding */
+    }
+
+    #cadastro_botao {
+        padding: 0.6em 1em; /* Ajusta padding do botão */
+        font-size: 0.9em;
     }
 
     .options {
-        font-size: 0.85em; /* Texto das opções menor */
-        flex-direction: column; /* Empilhar "Lembrar" e "Esqueceu senha" */
-        align-items: flex-start; /* Alinhar à esquerda */
-        gap: 0.5em; /* Espaço entre os itens empilhados */
-        margin-bottom: 1em;
+        font-size: 0.8em;
+        flex-direction: column; /* Empilha os itens */
+        align-items: center; /* Centraliza os itens empilhados */
+        gap: 0.8em;
+        margin-bottom: 0.8em;
     }
     .options .forgot {
-        align-self: flex-end; /* "Esqueceu a senha" à direita */
+        align-self: center; /* Centraliza "Esqueceu a senha?" */
     }
 
     .secondary-link {
-        font-size: 0.85em;
+        font-size: 0.8em;
+        margin-top: 0.6em;
+        text-align: center; /* MUITO IMPORTANTE para centralizar o texto no mobile */
     }
 }
